@@ -7,7 +7,7 @@ import {
   UrlConstants,
 } from 'src/app/constants/urlConstants';
 import { environment } from 'src/environments/environment';
-import { menuItemsMockResponse } from 'src/mock-api/devices';
+import { menuById, menuItemsMockResponse } from 'src/mock-api/devices';
 import {
   ScheduleMenuItem,
   ScheduleMenuItemAdapter,
@@ -209,6 +209,12 @@ export class ScheduleMenuService {
         }
       }),
       catchError((error: HttpErrorResponse) => {
+        if(environment.useMockApi){
+          return of({
+            success: true,
+            data: menuById.map((values: any) => this.scheduleMenuItems.adapt(values)),
+          })
+        }
         return of({
           success: false,
           message: error.error.errors[0].code,

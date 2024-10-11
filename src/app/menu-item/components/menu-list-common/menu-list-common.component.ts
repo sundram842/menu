@@ -57,6 +57,8 @@ export class MenuListCommonComponent extends SubscriptionBase implements OnChang
 
   @Input({ required:false }) public defaultSelectedQuantity?:Quantities[];
 
+  @Input({required:false}) public dq?:Quantities[]
+
   public isAllSelected: boolean = false;
 
   public selectedItems: { [key: string]: boolean | undefined } = {};
@@ -109,7 +111,6 @@ export class MenuListCommonComponent extends SubscriptionBase implements OnChang
         this.seletedSchedule.push(element);
       }
     });
-    this.toggleSelectAll();
     this.scheduleSelectedItems.emit(this.seletedSchedule);
     this.selectedIdsChange.emit(this.selectedIds);
   }
@@ -129,6 +130,10 @@ export class MenuListCommonComponent extends SubscriptionBase implements OnChang
     if (changes.defaultSelectedQuantity) {
       this.quantities = changes.defaultSelectedQuantity.currentValue;
     }
+  if(changes.dq){
+    this.quantities = this.dq ? this.dq : [];
+  }
+    
   }
   
   public toggleSelectAll() {
@@ -157,7 +162,6 @@ export class MenuListCommonComponent extends SubscriptionBase implements OnChang
   }
 
   public onCheckboxChange(element: MenuItem) {
-    this.defaultQuantity();
     if (this.selectedIds.includes(element.id)) {
       this.selectedIds = this.selectedIds.filter(id => id !== element.id);
       this.quantities = this.quantities.filter(q => q.id !== element?.id);

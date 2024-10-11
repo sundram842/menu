@@ -46,14 +46,14 @@ export class AuthInterceptor implements HttpInterceptor {
     const loginUrl = `${this.apiUrl}auth/login`;
     const logoutUrl = `${this.apiUrl}auth/logout`;
 
-    if (
-      logoutUrl === request.url ||
-      (loginUrl !== request.url && (!bcId || !partnerId || !userId))
-    ) {
-      this.cookieService.deleteAll();
-      localStorage.clear();
-      this.router.navigate(['/login']);
-    }
+    // if (
+    //   logoutUrl === request.url ||
+    //   (loginUrl !== request.url && (!bcId || !partnerId || !userId))
+    // ) {
+    //   this.cookieService.deleteAll();
+    //   localStorage.clear();
+    //   this.router.navigate(['/login']);
+    // }
     if (bcId) headers['bc-id'] = bcId;
     if (partnerId) headers['partner-id'] = partnerId;
     if (userId) headers['user-id'] = userId;

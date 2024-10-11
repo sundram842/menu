@@ -1,9 +1,9 @@
-<div *ngIf="loader" class="pageLoader">
+<!-- <div *ngIf="loader" class="pageLoader">
   <div class="custom-loader"></div>
-</div>
+</div> -->
 
-<h1 *ngIf="!loader" matDialogTitle>Update Menu Schedule <a [mat-dialog-close] class="customclosebtn"><em></em><em></em></a></h1>
-<mat-dialog-content *ngIf="menuDetail">
+<h1 matDialogTitle>Update Menu Schedule <a [mat-dialog-close] class="customclosebtn"><em></em><em></em></a></h1>
+<mat-dialog-content>
   <mat-stepper linear #stepper class="customstepper" (selectionChange)="onStepChange($event)">
     <mat-step [completed]="scheduleForm.valid">
       <form [formGroup]="scheduleForm">
@@ -80,7 +80,7 @@
       <form>
         <div class="stpebody">
           <ng-template matStepLabel>Inventory / Stock</ng-template>
-          <app-menu-list-common *ngIf="selectedItemsForSchedule?.length" [displayedColumns]="displayedColumnsTwo" [menuDetails]="selectedItemsForSchedule ? selectedItemsForSchedule : []" [readonly]="true" (updatedQuantities)="selectedItems = $event" [defaultSelection]="selectedMenuItems"/>
+          <app-menu-list-common *ngIf="selectedItemsForSchedule?.length" [displayedColumns]="displayedColumnsTwo" [menuDetails]="selectedItemsForSchedule ? selectedItemsForSchedule : []" [readonly]="true" (updatedQuantities)="selectedItems = $event" [dq]="dq"/>
         </div>
         <div class="steperbottom">
           <button mat-stroked-button color="primary" matStepperPrevious class="float-left">Back</button>

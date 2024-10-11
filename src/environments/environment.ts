@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://10.150.220.156:3600/',
-  // apiUrl: 'http://localhost:3600/',
+  // apiUrl: 'http://10.150.220.156:3600/',
+  apiUrl: 'http://localhost:3600/',
 
-  useMockApi: false,
+  useMockApi: true,
 
 
   partnerLogos: {

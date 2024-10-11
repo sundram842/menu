@@ -43,6 +43,8 @@ export class UpdateMenuComponent extends SubscriptionBase {
   
   public loader?: boolean;
 
+  public dq?:{ id: string; quantity: number }[]
+
   @ViewChild('stepper', { static: false }) stepper?: MatStepper;
 
   public menuDetail?:ScheduleDetailMenu;
@@ -80,6 +82,9 @@ export class UpdateMenuComponent extends SubscriptionBase {
   onStepChange(event: StepperSelectionEvent): void {
     if (event.selectedIndex === 1 && !this.menuItems?.length) {
       this.getMenuItems();
+    }
+    if(event.selectedIndex === 2){
+      this.dq= this.selectedItems
     }
   }
 
