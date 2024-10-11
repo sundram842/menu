@@ -1,0 +1,95 @@
+.dialog-header {
+  background-color: white;
+  margin-bottom: 0px;
+  padding: 5px 20px;
+}
+.formFieldRadioGrp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+}
+.switch-location {
+  font-size: 14px;
+  color: var(--color11);
+  font-weight: 300;
+}
+.add-btn-details {
+  background: none !important;
+  color: var(--primary-color) !important;
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  display: flex;
+  cursor: pointer;
+  & .mat-icon {
+    font-size: 14px;
+  }
+  & .add-new-loc {
+    font-size: 13px;
+  }
+}
+.add-new-student {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+}
+.edit-btn-details {
+  display: none;
+}
+.formFieldRadioBtn {
+  padding: 10px 0px;
+  width: 100%;
+  border-bottom: 1px solid var(--color5);
+  &:hover {
+    background-color: var(--color5);
+    cursor: pointer;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    .edit-btn-details {
+      display: block;
+    }
+  }
+}
+.bottom-stepper-align {
+  background: var(--color5);
+  padding: 5px;
+  & button {
+    color: var(--color1);
+    background-color: var(--primary-color);
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 15px;
+  }
+}
+.location-scroll {
+  .mat-mdc-radio-group .mat-mdc-radio-button:last-child {
+    border: none;
+  }
+}
+.locationWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & .location-name {
+    font-size: 15px;
+    color: var(--color10);
+    font-weight: 400;
+  }
+  & .loc-edit {
+    text-transform: uppercase;
+    font-size: 13px;
+    color: var(--primary-color);
+    cursor: pointer;
+    margin-right: 10px;
+  }
+}
+.loc-address {
+  font-size: 12px;
+  color: var(--color25);
+  font-weight: 400;
+}

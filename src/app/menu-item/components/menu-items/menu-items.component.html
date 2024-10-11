@@ -1,0 +1,5 @@
+
+<div *ngIf="loader" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+<app-menu-list-common  [menuDetails]="menuItems" (addMenuItem)="menuDetails($event)"></app-menu-list-common>

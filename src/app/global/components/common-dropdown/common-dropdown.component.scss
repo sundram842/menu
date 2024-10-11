@@ -1,0 +1,32 @@
+$primaryclr: var(--custom-primary-color);
+.searchclear {
+  position: sticky;
+  top: 39px;
+  left: 0px;
+  background: white;
+  right: 0px;
+  padding: 5px;
+  display: inline-block;
+  width: 100%;
+  z-index: 999;
+  border-bottom: 1px solid #ccc;
+
+  & span {
+    font-size: 12px;
+    margin-right: 10px;
+    display: inline-block;
+    border-right: 1px solid #ccc;
+    padding-right: 10px;
+  }
+
+  & a {
+    color: #000;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 12px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

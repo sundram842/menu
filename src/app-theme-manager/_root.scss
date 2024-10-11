@@ -1,0 +1,108 @@
+:root {
+  --accent: #262626;
+  --warn: #f44336;
+  --color1: #ffffff;
+  --color2: #000000;
+  --color4: #cccccc;
+  --color5: #f5f5f5;
+  --color6: #7b7b7b;
+  --color7: #3b3b3b;
+  --color8: #f8f8f8;
+  --color9: #606060;
+  --color10: #565656;
+  --color11: #b2b2b2;
+  --color12: #707070;
+  --color13: #e1e1e1;
+  --color14: #e8e8e8;
+  --color16: #9a9a9a;
+  --color17: #8f8f8f;
+  --color18: #fffaf2;
+  --color19: #4a4a4a;
+  --color20: #d5d5d5;
+  --color21: #dbdbdb;
+  --color22: #949494;
+  --color23: #c4c4c4;
+  --color24: #8a8a8a;
+  --color25: #a5a5a5;
+  --color26: #e2e2e2;
+  --color27: #666666;
+  --color28: #f9f9f9;
+  --color29: #7f7f7f;
+  --color30: #f4f5f7;
+  --color31: #727272;
+  --color32: #2d2d2d;
+  --color34: #fffffc;
+  --color35: #ffe0a8;
+  --color36: #7a7a7a;
+  --color37: #515151;
+  --color38: #d9e8ff;
+  --color40: #ffb350;
+  --color41: #fffff8;
+  --color42: #ffb350;
+  --color43: #f7f7f7;
+
+  --overlay: rgba(0, 0, 0, 0.3);
+  // custom font
+  --custom-font: 'DM Sans', sans-serif;
+
+  --greenBackground: #eaf6ed;
+  --greenText: #166c3b;
+  --greenBorder: #d3efda;
+
+  --blueText: #0665d5;
+  --blueBackground: #f2f8ff;
+  --blueBorder: #9ec2ec;
+
+  --redBackground: #fff0ee;
+  --redText: #bb032a;
+  --redBorder: #ffe1de;
+
+  --orangeBackground: #ffedd9;
+  --orangeText: #ff6600;
+  --orangeBorder: #fee2d4;
+
+  --grayBackground: #f3f3f3;
+  --grayText: #5e5e5e;
+
+  --saffranBackground: #fdf2dc;
+  --saffranText: #845201;
+  --safranBorder: #fbe5b6;
+
+  --yellowBackground: #fffdb1;
+  --yellowText: #ff8912;
+  --yellowBorder: #fbe5b6;
+
+  --emailboxshadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  --dashboard-shadow: 0px 3px 6px #00000029;
+  --notificationFooter: 0px -3px 2px #0000000f;
+  --rewardbox: 0px 3px 6px #0000001a;
+  --popupFooterShadow: 0px -1px 6px #00000029;
+  --headerShadow: 0px 3px 12px #00000029;
+  --sideBarShadow: #0000003d 0 3px 8px;
+}
+
+//Sass lists & arrays
+$font-sizes: (
+  small: 12px,
+  regular: 14px,
+  medium: 16px,
+  x-medium: 18px,
+  large: 20px,
+  x-large: 24px,
+  xx-large: 32px,
+);
+$font-weights: (
+  light: 300,
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  extrabold: 800,
+  black: 900,
+);
+$shake-distance: 10px;
+$shake-duration: 0.5s;
+$breakpoints: (
+  mobile: 540px,
+  tablet: 1024px,
+);

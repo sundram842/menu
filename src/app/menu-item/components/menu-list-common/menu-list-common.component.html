@@ -1,0 +1,168 @@
+<section class="scrollTable mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          class=""
+          color="primary"
+          [checked]="isAllSelected || readonly"
+          (change)="toggleSelectAll()"
+          [disabled]="readonly && menuDetails?.length"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox
+          class=""
+          [checked]="selectedItems[element?.id] || readonly"
+          (change)="onCheckboxChange(element)"
+          color="primary"
+          [disabled]="readonly"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- SKU ID Name Column -->
+    <ng-container matColumnDef="skuId">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'MENU.SKU_ID' | translate }}
+        <!-- SKU ID -->
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{( element?.sku | titlecase) ?? '-'}}
+      </td>
+    </ng-container>
+
+    <!-- SKU ID Name Column -->
+    <!-- <ng-container matColumnDef="skuId">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'MENU.SKU_ID' | translate }} </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.sku }}
+      </td>
+    </ng-container> -->
+
+    <!-- Name Column with Select All Checkbox -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'MENU.NAME' | translate }}
+        <!-- Name -->
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ (element?.name | titlecase) ?? '-'}}
+      </td>
+    </ng-container>
+
+    <!-- Display Name Column -->
+    <ng-container matColumnDef="displayName">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'MENU.DISPLAY_NAME' | translate }}
+        <!-- Display Name -->
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ (element?.displayName | titlecase) ?? '-'}}
+      </td>
+    </ng-container>
+
+    <!-- Primary Ingredient  Column -->
+    <ng-container matColumnDef="primaryIngredient">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'MENU.PRIMARY_INGREDIENT' | translate }}
+        <!-- Primary ingredient -->
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ (element?.primaryIngredientInfo?.displayName | titlecase)?? '-'}}
+      </td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'MENU.STATUS' | translate }}
+        <!-- Status -->
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ (element?.status | titlecase) ?? '-' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'MENU.CATEGORY' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ (element?.primaryCategoryInfo?.name | titlecase) ?? '-' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="subCategory">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ 'MENU.SUB_CATEGORY' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ (element?.secondaryCategoryInfo?.name | titlecase) ?? '-' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="count">
+      <th mat-header-cell *matHeaderCellDef>{{"MENU.STOCK"|translate}}</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element?.quantity ?? '-' }}
+      </td>
+    </ng-container>
+
+    <!-- Inventory/stock Column -->
+    <ng-container matColumnDef="qty">
+      <th mat-header-cell *matHeaderCellDef class="column-alignment">
+        {{"MENU.STOCK"|translate}}
+      </th>
+      <td mat-cell *matCellDef="let element" class="column-alignment">
+        <div class="d-flex align-center">
+          <button
+            mat-icon-button
+            (click)="decrement(element.id)"
+            [disabled]="getQuantity(element.id) <= minValue"
+          >
+            <mat-icon>remove</mat-icon>
+          </button>
+          <mat-form-field
+            appearance="outline"
+            class="w-50"
+            style="margin-top: 20px"
+          >
+            <input
+              matInput
+              [ngModel]="getQuantity(element.id)"
+              (keypress)="allowOnlyNumbers($event)"
+              (ngModelChange)="onQuantityChange(element.id, $event)"
+              class="text-center"
+              type="text"
+            />
+          </mat-form-field>
+          <button
+            mat-icon-button
+            (click)="increment(element.id)"
+            [disabled]="value >= maxValue"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"(click)="onRowClick($event, row.id)"></tr>
+  </table>
+  <div class="noClasses" *ngIf="!dataSource?.data?.length">
+    {{ 'DEVICES.NODATAMATCHING' | translate }}
+    <!-- No items found -->
+  </div>
+</section>
+<section class="actionsWrap" *ngIf="!addDisable">
+  <button mat-fab color="primary" class="addBtn" (click)="createMenuItem()">
+    <mat-icon>add</mat-icon>
+  </button>
+</section>

@@ -1,0 +1,36 @@
+
+<div *ngIf="loader" class="pageLoader">
+    <div class="custom-loader"></div>
+  </div>
+  <h2 mat-dialog-title>
+      Assign Item for device
+      <a mat-dialog-close class="customclosebtn"><em></em><em></em></a>
+  </h2>
+  <mat-dialog-content>
+    <form class="">
+        <div class="stpebody">
+          <h5 class="sectionHeader">Search Items</h5>
+              <div class="searchwrapper">
+                  <input matInput 
+                 (keyup)="applyFilter($event)" placeholder="Search by item name.." #input />
+                  <mat-icon>search</mat-icon>
+              </div>
+              <div class="searchResultsWrap">
+                  <h5 class="sectionHeader">Items ({{filterValue ? availableMenuItems?.length : allMenuItems?.length}})</h5>
+                  <app-menu-list-common *ngIf="allMenuItems" [displayedColumns]="displayedColumns" [menuDetails]="filterValue ? availableMenuItems : allMenuItems"(selectedIdsChange)="seletedItems = $event"></app-menu-list-common>
+              </div>
+              <!-- <div *ngIf="!availableMenuItems?.length && filterValue">
+                <span> -->
+                  <!-- {{'CLASSES.NO_RECORDS'| translate : {keyword : filterValue ?? ''} }} -->
+                 <!-- {{ 'There is no items matching with '+filterValue}}
+                </span>
+              </div> -->
+        </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-raised-button  color="primary" (click)="assignItems()" [disabled]="!seletedItems?.length">
+      <!-- {{'DEVICES.ASSIGN_ITEM'}} -->
+       Assign
+    </button>
+  </mat-dialog-actions>

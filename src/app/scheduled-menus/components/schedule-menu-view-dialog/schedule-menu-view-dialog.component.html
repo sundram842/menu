@@ -1,0 +1,48 @@
+<div *ngIf="loader" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+<h2 class="dialog-header">
+    <div class="headerElements">
+      <div class="icon-header">
+        <mat-icon (click)="redirectTermList()">chevron_left</mat-icon>
+        <div >
+          <span class="title">{{(scheduleDetails?.name | titlecase) ?? '-' }}</span>
+          <span [ngClass]="{
+            'greenChip': scheduleDetails?.status === 'active',
+            'redChip':scheduleDetails?.status === 'inactive',
+            'yellowChip': scheduleDetails?.status === 'pending'
+          }">{{ (scheduleDetails?.status | titlecase) ?? '-' }}</span>
+        </div>
+      </div>
+      <!-- <button class="editFrequency" mat-button (click)="editFrequency()">
+      {{ 'CLASSES.EDIT_FREQUENCY' | translate }}
+    </button> -->
+      <!-- <div>
+        <span><button  mat-button class="active" *ngIf="deviceDetails?.status !== deviceStatus.ACTIVATE" (click)="activateDevice()">
+          {{ 'DEVICES.ACTIVE_DEVICE' | translate }}
+        </button></span>
+        <span><button  mat-button class="deactive" *ngIf="deviceDetails?.status !== deviceStatus.INACTTIVE" (click)="deactivateDevice()">
+            {{ 'DEVICES.DISABLE_DEVICE' | translate }}
+          </button></span>
+      </div> -->
+    </div>
+  </h2>
+
+  <mat-tab-group animationDuration="0ms" mat-stretch-tabs="false" mat-align-tabs="start" [(selectedIndex)]="selectionTabChange" (selectedTabChange)="onTabChange($event)">
+    <mat-tab label="Details">
+      <div class="scrollTable">
+         <app-menu-detais *ngIf="scheduleItemId" [scheduleItemId]="scheduleItemId" (emitScheduleDetails)="scheduleDetails = $event" (menuGetUpdate)="menuUpdate($event)"></app-menu-detais>
+      </div>
+    </mat-tab>
+    <mat-tab label="Schedule Menu Items">
+      <section class="customView">
+        <div class="actionsWrap">
+          <button mat-button color="primary" [disabled]="!selectedItems?.length" (click)="updateMenu()">
+            {{'DEVICES.UNASSIGN_ITEM'| translate}} 
+          </button> 
+        </div>
+        <app-menu-list-common  [menuDetails]="menuItems" [displayedColumns]="displayedColumns"         (scheduleSelectedItems)="handelItems($event)" [defaultSelection]="menuItems"> </app-menu-list-common>
+     
+    </section>
+    </mat-tab>
+  </mat-tab-group>

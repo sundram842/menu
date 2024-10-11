@@ -1,0 +1,352 @@
+/**
+ * This mixin sets the font size and weight for an element based on predefined maps of font sizes and weights.
+ *
+ * @param {String} $size - The key for the font size from the $font-sizes map.
+ * @param {String} $weight - The key for the font weight from the $font-weights map.
+ */
+@mixin font-style($size, $weight) {
+  $size: map-get($font-sizes, $size);
+  $weight: map-get($font-weights, $weight);
+
+  @if $size==null {
+    @error "Invalid font size key: #{$size}.";
+  }
+
+  @if $weight==null {
+    @error "Invalid font weight key: #{$weight}.";
+  }
+
+  font-size: $size !important;
+  font-weight: $weight !important;
+}
+
+@mixin border-radius($radius) {
+  $prefixes: ('-webkit-', '-moz-', '-ms-', '-o-', '');
+
+  @each $prefix in $prefixes {
+    $property: if($prefix== '', 'border-radius', $prefix + 'border-radius');
+    #{$property}: $radius;
+  }
+
+  border-radius: $radius;
+}
+
+/**
+ * This mixin applies styles based on predefined breakpoints and media query types.
+ *
+ * @param {String} $breakpoint - The key for the breakpoint from the $breakpoints map.
+ * @param {String} $query-type - The type of media query (default is 'max-width').
+ */
+@mixin respond-media($breakpoint, $query-type: max-width) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @media (#{$query-type}: #{$breakpoint-value}) {
+      @content;
+    }
+  } @else {
+    @error "No value found for breakpoint: #{$breakpoint}. Please check your breakpoint map.";
+  }
+}
+
+@mixin customFont {
+  font-family: var(--custom-font) !important;
+}
+
+@mixin d-i-bloc {
+  display: inline-block;
+}
+
+@mixin fullwidth {
+  width: 100%;
+}
+
+@mixin fullheight {
+  height: 100%;
+}
+
+@mixin zeromargin {
+  margin: 0px;
+}
+
+@mixin zeropadding {
+  padding: 0px;
+}
+
+@mixin transform($transforms) {
+  transform: $transforms;
+  -webkit-transform: $transforms;
+  -moz-transform: $transforms;
+  -ms-transform: $transforms;
+  -o-transform: $transforms;
+}
+
+@mixin shake {
+  animation: shake-keyframes #{$shake-duration} ease-in-out;
+  -webkit-animation: shake-keyframes #{$shake-duration} ease-in-out;
+}
+
+@keyframes shake-keyframes {
+  0% {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+  }
+
+  10%,
+  90% {
+    transform: translateX(-#{$shake-distance});
+    -webkit-transform: translateX(-#{$shake-distance});
+    -moz-transform: translateX(-#{$shake-distance});
+    -ms-transform: translateX(-#{$shake-distance});
+    -o-transform: translateX(-#{$shake-distance});
+  }
+
+  30%,
+  70% {
+    transform: translateX(#{$shake-distance});
+    -webkit-transform: translateX(#{$shake-distance});
+    -moz-transform: translateX(#{$shake-distance});
+    -ms-transform: translateX(#{$shake-distance});
+    -o-transform: translateX(#{$shake-distance});
+  }
+
+  50% {
+    transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+  }
+}
+
+@mixin flexwithcenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin vpheight {
+  height: 100vh;
+}
+
+@mixin flex {
+  display: flex;
+  align-items: center;
+}
+
+@mixin textcenter {
+  text-align: center !important;
+}
+
+@mixin textRight {
+  text-align: right;
+}
+
+@mixin textLeft {
+  text-align: left;
+}
+
+@mixin guidelinesMSG {
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  color: var(--color12);
+  @include font-style(medium, regular);
+}
+
+@mixin tabsSectionHeader {
+  .sectionHeader {
+    margin: 0 0 10px 0;
+    font-size: 13px;
+    color: var(--color4);
+    font-weight: nth($font-weights, 3);
+    text-transform: uppercase;
+    @include textLeft;
+  }
+}
+
+@mixin guidelinesList {
+  padding: 0 0 0 20px;
+  margin: 0;
+  color: var(--color12);
+
+  li {
+    margin-bottom: 4px;
+    font-size: 13px;
+    font-weight: nth($font-weights, 3);
+  }
+}
+
+@mixin passwordGuideLines {
+  .guideLinesWrap {
+    margin-top: 25px;
+    padding: 16px;
+    background-color: var(--color34);
+    @include border-radius(8px);
+    border: 1px solid var(--color35);
+    @include fullwidth;
+
+    .guidelinesMSG {
+      @include font-style(small, regular);
+      color: var(--color7);
+      text-transform: uppercase;
+      letter-spacing: 0.96px;
+    }
+
+    ul {
+      padding-left: 16px;
+
+      li {
+        @include font-style(regular, regular);
+        color: var(--color7);
+        text-wrap: wrap;
+
+        & ::marker {
+          color: var(--color7) !important;
+        }
+      }
+    }
+  }
+}
+
+@mixin sectionTitles {
+  @include font-style(xx-large, bold);
+  color: var(--color7);
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  @include zeromargin;
+}
+
+@mixin notificationBox {
+  .notificationBox {
+    padding: 13px 25px 13px 25px;
+    border-bottom: 1px solid var(--color13);
+
+    &:hover {
+      background-color: var(--color15);
+      cursor: pointer;
+    }
+
+    .notificationContainer {
+      &::before {
+        content: '\2022';
+        color: var(--color4);
+        font-weight: map-get($font-weights, black);
+        display: inline-block;
+        width: 1em;
+        margin-left: -1em;
+      }
+
+      .notification {
+        @include font-style(medium, regular);
+        color: var(--color7);
+        @include zeromargin;
+      }
+
+      .timeWrap {
+        font-size: map-get($font-sizes, regular);
+        color: var(--color16);
+        margin: 8px 0px 0px 0px;
+      }
+    }
+  }
+}
+
+@mixin tableProperties {
+  @include customFont;
+  table-layout: fixed;
+  @include fullwidth;
+  background-color: var(--color1);
+
+  th {
+    @include font-style(small, regular);
+    color: var(--color12);
+    text-transform: capitalize;
+  }
+
+  tbody {
+    tr,
+    th {
+      color: var(--color2) !important;
+    }
+  }
+}
+
+@mixin tableRowHover {
+  .mat-mdc-row:hover .mat-mdc-cell {
+    background-color: var(--color5);
+    cursor: pointer;
+  }
+}
+
+@mixin customAddFabBtn {
+  @extend .position-fixed;
+  right: 30px;
+  bottom: 30px;
+}
+
+@mixin twoColoumnLayout {
+  @include flex;
+  column-gap: 50px;
+  align-items: flex-start;
+  @include fullwidth;
+
+  .labels,
+  .contentPart {
+    p {
+      margin: 0 0 18px 0;
+    }
+  }
+
+  .labels {
+    width: 15%;
+    @include font-style(regular, regular);
+    color: var(--color12);
+  }
+
+  .contentPart {
+    width: 65%;
+    color: var(--color7);
+    @include font-style(regular, medium);
+
+    p {
+      .statusBlock {
+        .reason {
+          @extend .d-block;
+          font-size: map-get($font-sizes, small);
+          margin-top: 5px;
+          color: var(--color12);
+        }
+      }
+    }
+  }
+}
+
+@mixin profileCOntainer {
+  @include border-radius(50%);
+  @include flex;
+  justify-content: center;
+  border: 1px solid var(--primary-color);
+  background-color: var(--color15);
+  text-transform: uppercase;
+  @include font-style(x-large, medium);
+  color: var(--primary-color);
+  @include zeromargin;
+  padding: 23px;
+  width: calc(map-get($font-sizes, small) * 5);
+  height: calc(map-get($font-sizes, small) * 5);
+}
+
+@mixin customTextEllipse($width: null) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @if $width==fullwidth {
+    @include fullwidth;
+  } @else {
+    width: $width;
+  }
+}

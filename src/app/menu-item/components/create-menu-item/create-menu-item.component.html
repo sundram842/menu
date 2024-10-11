@@ -1,0 +1,459 @@
+<div *ngIf="loader" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+
+<div>
+  <h2 mat-dialog-title>
+    {{ 'MENU.NEW_ITEM' | translate }}
+    <a [mat-dialog-close]><em></em><em></em></a>
+  </h2>
+  <form [formGroup]="createMenuItemForm" (ngSubmit)="createMenuItem()">
+    <mat-dialog-content>
+      <ng-container *ngIf="menuDetails && data">
+        <!-- Code -->
+        <mat-form-field appearance="outline">
+          <mat-label>Code</mat-label>
+          <input matInput formControlName="code" required />
+          <mat-error *ngIf="createMenuItemForm?.controls?.code?.invalid">
+            {{ getErrorMessage(createMenuItemForm.controls.code, 'Code') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="outline">
+        <mat-label>{{ 'MENU.SELECT_TYPE' | translate }}</mat-label>
+        <mat-select formControlName="type" required>
+          <mat-option value="mobile" *ngFor="let type of types" [value]="type.key">{{type.value}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="createMenuItemForm.controls.type.invalid">
+          {{
+          getErrorMessage(createMenuItemForm.controls.type, 'MENU.TYPE' | translate)
+          }}
+        </mat-error>
+      </mat-form-field> -->
+        <!-- <mat-form-field appearance="outline">
+        <mat-label>{{ 'MENU.SELECT_POS_CLIENTS' | translate }}</mat-label>
+        <mat-select formControlName="client" required>
+          <mat-option value="mobile" *ngFor="let client of posClients"
+            [value]="client.id">{{client.displayName}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="createMenuItemForm.controls.type.invalid">
+          {{
+          getErrorMessage(createMenuItemForm.controls.type, 'MENU.TYPE' | translate)
+          }}
+        </mat-error>
+      </mat-form-field> -->
+
+        <!-- Sku -->
+        <mat-form-field appearance="outline">
+          <mat-label>SKU</mat-label>
+          <input matInput formControlName="sku" required />
+          <mat-error *ngIf="createMenuItemForm.controls.sku.invalid">
+            {{ getErrorMessage(createMenuItemForm.controls.sku, 'SKU') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Name -->
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required />
+          <mat-error *ngIf="createMenuItemForm.controls.name.invalid">
+            {{ getErrorMessage(createMenuItemForm.controls.name, 'Name') }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Display Name -->
+        <mat-form-field appearance="outline">
+          <mat-label>Display name</mat-label>
+          <input matInput formControlName="displayName" required />
+          <mat-error *ngIf="createMenuItemForm.controls.displayName.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.displayName,
+                'Display name'
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+        <!-- Description-->
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            type="text"
+            formControlName="description"
+            required
+          ></textarea>
+          <mat-error *ngIf="createMenuItemForm.controls.description.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.description,
+                'Description'
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- For now base price and selling price set default 0 -->
+        <!-- Base_Price Version -->
+        <!-- <mat-form-field appearance="outline">
+          <mat-label>Base price</mat-label>
+          <input
+            matInput
+            (input)="validatePositiveNumber($event)"
+            type="number"
+            formControlName="basePrice"
+            required
+          />
+          <mat-error *ngIf="createMenuItemForm.controls.basePrice.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.basePrice,
+                'Base price'
+              )
+            }}
+          </mat-error>
+        </mat-form-field> -->
+
+        <!-- Selling Price -->
+        <!-- <mat-form-field appearance="outline">
+          <mat-label>Selling price</mat-label>
+          <input
+            matInput
+            type="number"
+            (input)="validatePositiveNumber($event)"
+            formControlName="sellingPrice"
+            required
+          />
+          <mat-error *ngIf="createMenuItemForm.controls.sellingPrice.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.sellingPrice,
+                'Selling price'
+              )
+            }}
+          </mat-error>
+        </mat-form-field> -->
+
+        <!-- Primary Ingredient -->
+        <mat-form-field appearance="outline">
+          <mat-label>Primary ingredient</mat-label>
+          <mat-select formControlName="primaryIngredient" >
+            <mat-option
+              *ngFor="let ingredient of primaryIngredients"
+              [value]="ingredient?.id"
+            >
+              {{ ingredient?.title | titlecase}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="!primaryIngredients?.length" class="custom-error">
+          There is no Primary ingredients for create new item
+        </mat-error>
+        <!-- Category -->
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select
+            formControlName="category"
+            (selectionChange)="onCategorySelect($event)"
+          >
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category?.id"
+            >
+              {{ category?.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="!categories?.length"  class="custom-error">
+          There is no categories for create new item
+        </mat-error>
+
+        <!-- Sub Category -->
+        <ng-container *ngIf="displaySubCategory">
+          <mat-form-field appearance="outline">
+            <mat-label>Sub category</mat-label>
+            <mat-select formControlName="subCategory" >
+              <mat-option
+                *ngFor="let subCategory of subCategories"
+                [value]="subCategory?.id"
+              >
+                {{ subCategory?.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="createMenuItemForm.controls.subCategory.invalid">
+              {{
+                getErrorMessage(
+                  createMenuItemForm.controls.subCategory,
+                  'Sub category'
+                )
+              }}
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+
+        <!-- Can Be Modifier -->
+
+        <div style="margin: 10px 0 20px 0">
+          <span>Canbemodifier</span>
+          <mat-slide-toggle
+            formControlName="canBeModifier"
+            color="primary"
+            class="float-right"
+          ></mat-slide-toggle>
+        </div>
+
+        <!-- Unit Of Measurement -->
+        <mat-form-field appearance="outline">
+          <mat-label>Unit of measurement</mat-label>
+          <input matInput formControlName="unitOfMeasurement" required />
+          <mat-error
+            *ngIf="createMenuItemForm.controls.unitOfMeasurement.invalid"
+          >
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.unitOfMeasurement,
+                'Unit of measurement'
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngIf="!menuDetails && !data">
+        <!-- Code -->
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'MENU.CODE' | translate }}</mat-label>
+          <input matInput formControlName="code" required />
+          <mat-error *ngIf="createMenuItemForm?.controls?.code?.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.code,
+                'MENU.CODE' | translate
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="outline">
+        <mat-label>{{ 'MENU.SELECT_TYPE' | translate }}</mat-label>
+        <mat-select formControlName="type" required>
+          <mat-option value="mobile" *ngFor="let type of types" [value]="type.key">{{type.value}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="createMenuItemForm.controls.type.invalid">
+          {{
+          getErrorMessage(createMenuItemForm.controls.type, 'MENU.TYPE' | translate)
+          }}
+        </mat-error>
+      </mat-form-field> -->
+        <!-- <mat-form-field appearance="outline">
+        <mat-label>{{ 'MENU.SELECT_POS_CLIENTS' | translate }}</mat-label>
+        <mat-select formControlName="client" required>
+          <mat-option value="mobile" *ngFor="let client of posClients"
+            [value]="client.id">{{client.displayName}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="createMenuItemForm.controls.type.invalid">
+          {{
+          getErrorMessage(createMenuItemForm.controls.type, 'MENU.TYPE' | translate)
+          }}
+        </mat-error>
+      </mat-form-field> -->
+
+        <!-- Sku -->
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'MENU.SKU' | translate }}</mat-label>
+          <input matInput formControlName="sku" required />
+          <mat-error *ngIf="createMenuItemForm.controls.sku.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.sku,
+                'MENU.SKU' | translate
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Name -->
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'MENU.NAME' | translate }}</mat-label>
+          <input matInput formControlName="name" required />
+          <mat-error *ngIf="createMenuItemForm.controls.name.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.name,
+                'MENU.NAME' | translate
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Display Name -->
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'MENU.DISPLAY_NAME' | translate }}</mat-label>
+          <input matInput formControlName="displayName" required />
+          <mat-error *ngIf="createMenuItemForm.controls.displayName.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.displayName,
+                'MENU.DISPLAY_NAME' | translate
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+        <!-- Description-->
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'MENU.DESCRIPTION' | translate }}</mat-label>
+          <textarea
+            matInput
+            type="text"
+            formControlName="description"
+            required
+          ></textarea>
+          <mat-error *ngIf="createMenuItemForm.controls.description.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.description,
+                'MENU.DESCRIPTION' | translate
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+
+        <!-- For now base price and selling price set default 0 -->
+        <!-- Base_Price Version -->
+        <!-- <mat-form-field appearance="outline">
+          <mat-label>Base price</mat-label>
+          <input
+            matInput
+            (input)="validatePositiveNumber($event)"
+            type="number"
+            formControlName="basePrice"
+            required
+          />
+          <mat-error *ngIf="createMenuItemForm.controls.basePrice.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.basePrice,
+                'Base price'
+              )
+            }}
+          </mat-error>
+        </mat-form-field> -->
+
+        <!-- Selling Price -->
+        <!-- <mat-form-field appearance="outline">
+          <mat-label>Selling price</mat-label>
+          <input
+            matInput
+            type="number"
+            (input)="validatePositiveNumber($event)"
+            formControlName="sellingPrice"
+            required
+          />
+          <mat-error *ngIf="createMenuItemForm.controls.sellingPrice.invalid">
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.sellingPrice,
+                'Selling price'
+              )
+            }}
+          </mat-error>
+        </mat-form-field> -->
+
+        <!-- Primary Ingredient -->
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'MENU.PRIMARY_INGREDIENT' | translate }}</mat-label>
+          <mat-select formControlName="primaryIngredient">
+            <mat-option
+              *ngFor="let ingredient of primaryIngredients"
+              [value]="ingredient?.id"
+            >
+              {{ ingredient?.title | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="!primaryIngredients?.length" class="custom-error">
+          {{ 'MENU.PRIMARY_INGREDIENT_ERROR' | translate }}
+        </mat-error>
+        <!-- Category -->
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'MENU.CATEGORY' | translate }}</mat-label>
+          <mat-select
+            formControlName="category"
+            (selectionChange)="onCategorySelect($event)"
+          >
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category?.id"
+            >
+              {{ category?.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="!categories?.length" class="custom-error">
+          {{ 'MENU.CATEGORY_ERROR' | translate }}
+        </mat-error>
+
+        <!-- Sub Category -->
+        <ng-container *ngIf="displaySubCategory">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'MENU.SUB_CATEGORY' | translate }}</mat-label>
+            <mat-select formControlName="subCategory" required>
+              <mat-option
+                *ngFor="let subCategory of subCategories"
+                [value]="subCategory?.id"
+              >
+                {{ subCategory?.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="createMenuItemForm.controls.subCategory.invalid">
+              {{
+                getErrorMessage(
+                  createMenuItemForm.controls.subCategory,
+                  'MENU.SUB_CATEGORY' | translate
+                )
+              }}
+            </mat-error>
+          </mat-form-field>
+        </ng-container>
+
+        <!-- Can Be Modifier -->
+
+        <div style="margin: 10px 0 20px 0">
+          <span>Canbemodifier</span>
+          <mat-slide-toggle
+            formControlName="canBeModifier"
+            color="primary"
+            class="float-right"
+          ></mat-slide-toggle>
+        </div>
+
+        <!-- Unit Of Measurement -->
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'MENU.MEASUREMENT' | translate }}</mat-label>
+          <input matInput formControlName="unitOfMeasurement" required />
+          <mat-error
+            *ngIf="createMenuItemForm.controls.unitOfMeasurement.invalid"
+          >
+            {{
+              getErrorMessage(
+                createMenuItemForm.controls.unitOfMeasurement,
+                'MENU.MEASUREMENT' | translate
+              )
+            }}
+          </mat-error>
+        </mat-form-field>
+      </ng-container>
+    </mat-dialog-content>
+
+    <!-- Submit Button -->
+    <mat-dialog-actions align="end">
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        [disabled]="!createMenuItemForm.valid"
+      >
+       {{ menuDetails ? ('MENU.UPDATE'| translate ) : ('MENU.SUBMIT'| translate ) }}
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

@@ -1,0 +1,137 @@
+<div *ngIf="loading" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+<section *ngIf="!frgotPassword">
+  <section class="loginSection" id="loginSections">
+    <section class="loginWrap">
+      <!-- <form [formGroup]="userForm"> -->
+      <h3 class="title text-center">
+        {{"GLOBAL.LOGIN" | translate}}
+      </h3>
+      <ng-otp-input
+        #ngOtpInput
+        [config]="{ length: 4, allowNumbersOnly: true, isPasswordInput: true }"
+        class="otpInput"
+        (keydown)="onOtpChange($event)"
+        (keydown.enter)="onSubmit()"
+        [formCtrl]="pinControl"
+        *ngIf="pinControl !== null"
+      ></ng-otp-input>
+      <div class="numpad">
+        <button class="numpad-button" mat-stroked-button (click)="addDigit(1)">
+          1
+        </button>
+        <button class="numpad-button" mat-stroked-button (click)="addDigit(2)">
+          2
+        </button>
+        <button class="numpad-button" mat-stroked-button (click)="addDigit(3)">
+          3
+        </button>
+        <button class="numpad-button" mat-stroked-button (click)="addDigit(4)">
+          4
+        </button>
+        <button class="numpad-button" mat-stroked-button (click)="addDigit(5)">
+          5
+        </button>
+        <button class="numpad-button" mat-stroked-button (click)="addDigit(6)">
+          6
+        </button>
+        <button class="numpad-button" mat-stroked-button (click)="addDigit(7)">
+          7
+        </button>
+        <button class="numpad-button" mat-stroked-button (click)="addDigit(8)">
+          8
+        </button>
+        <button class="numpad-button" mat-stroked-button (click)="addDigit(9)">
+          9
+        </button>
+        <button
+          class="numpad-button zero"
+          mat-stroked-button
+          (click)="addDigit(0)"
+        >
+          0
+        </button>
+      </div>
+      <div class="actions">
+        <button mat-stroked-button color="warn" (click)="clearPin()">
+          {{"GLOBAL.CLEAR" | translate}}
+          <!-- Clear -->
+        </button>
+        <button
+          mat-raised-button
+          type="submit"
+          color="primary"
+          [disabled]="!userForm.valid"
+          (click)="onSubmit()"
+        >
+        {{"GLOBAL.LOGIN" | translate}}
+        </button>
+      </div>
+      <!-- </form> -->
+    </section>
+  </section>
+</section>
+
+<section *ngIf="frgotPassword">
+  <section class="loginSection" id="loginSections">
+    <section class="loginWrap-card-adjust">
+      <button
+        class="back-btn"
+        (click)="backtomain()"
+        mat-button
+        routerLink="../"
+      >
+        <mat-icon>arrow_back</mat-icon>
+        Back
+      </button>
+      <form [formGroup]="PuserForm">
+        <h3 class="display-1">{{ 'GLOBAL.LOGIN' | translate }}</h3>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'GLOBAL.USER_NAME' | translate }}</mat-label>
+            <input matInput type="text" formControlName="Pusername" />
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-error *ngIf="g['Pusername'].touched && g['Pusername'].invalid">
+              <mat-error *ngIf="g['Pusername'].hasError('required')"
+                >User Id is required</mat-error
+              >
+              <mat-error
+                *ngIf="
+                  g['Pusername'].touched &&
+                  !g['Pusername'].hasError('required') &&
+                  g['Pusername'].hasError('pattern')
+                "
+              >
+                Username must be atleast 1 character,1 number and 1 special
+                character!
+              </mat-error>
+              <mat-error
+                *ngIf="
+                  g['Pusername'].touched &&
+                  !g['Pusername'].hasError('required') &&
+                  !g['Pusername'].hasError('pattern') &&
+                  !g['Pusername'].hasError('minlength') &&
+                  g['Pusername'].hasError('maxlength')
+                "
+              >
+                Username must not exceed 250 characters
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="actions">
+          <button
+            mat-raised-button
+            type="submit"
+            color="primary"
+            [disabled]="!PuserForm.valid"
+            (click)="onSubmit()"
+          >
+            {{ 'GLOBAL.SUBMIT' | translate }}
+          </button>
+        </div>
+      </form>
+    </section>
+  </section>
+</section>

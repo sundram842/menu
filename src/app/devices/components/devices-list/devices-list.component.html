@@ -1,0 +1,33 @@
+<div *ngIf="loader" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+<section class="scrollTable mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="displayName">
+        <th mat-header-cell *matHeaderCellDef class="customColoumnGap">Display name</th>
+        <td mat-cell *matCellDef="let element" class="customColoumnGap">{{ element.name | titlecase}}</td>
+      </ng-container>
+      <ng-container matColumnDef="model">
+        <th mat-header-cell *matHeaderCellDef>Model</th>
+        <td mat-cell *matCellDef="let element">{{ element.model | titlecase}}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.status | titlecase}}</td>
+      </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef class="status">Created at</th>
+        <td mat-cell *matCellDef="let element" class="status">{{element.dateOfInstallation | date: 'MMM dd, yyyy'}}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="openDetailView(row)"></tr>
+    </table>
+    <div class="noClasses" *ngIf="!dataSource?.data?.length">No Items found</div>
+  </section>
+
+    <section class="actionsWrap">
+    <button mat-fab color="primary" class="addBtn" (click)="registerDevice()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </section>

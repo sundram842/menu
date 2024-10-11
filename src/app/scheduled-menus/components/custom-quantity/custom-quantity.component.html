@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>
+    Custom Inventory/stock
+    <!-- <span class="title-text">&minus;<span class="titleHead"></span>
+      {{(classDetails?.title ?? "-") | titlecase}}
+      <span [ngClass]="{
+        'greenChip': classDetails?.status === classAction.ONGOING,
+        'yellowChip': classDetails?.status === classAction.YET_TO_START ,
+        'grayChip': classDetails?.status === classAction.COMPLETED,
+        'orangeChip': classDetails?.status === classAction.CANCELLED}">{{classDetails?.status ===
+        classAction.YET_TO_START ? ('CLASSES.YET_TO_START'|translate) :( classDetails?.status |
+        titlecase)}}</span>
+    </span> -->
+    <a [mat-dialog-close]><em></em><em></em></a>
+  </h2>
+  <form [formGroup]="quantityForm" class="batchDetailsForm">
+    <mat-dialog-content>
+      <section class="info-Sticker">
+        <p>Update for&nbsp;</p>
+      </section>
+      <section class="contentWrap">
+        <mat-form-field appearance="outline" class="formFieldsWidth">
+          <mat-label>Inventory/stock</mat-label>
+          <input type="number" matInput formControlName="subject" required />
+          <mat-error class="err-adjust" *ngIf="quantityForm?.controls?.quantity?.invalid">
+            {{ getErrorMessage(quantityForm.controls.quantity, 'quantity' ) }}
+          </mat-error>
+        </mat-form-field>
+      </section>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button [disabled]="!quantityForm.valid" mat-raised-button color="primary">
+       Update
+      </button>
+    </mat-dialog-actions>
+  </form>

@@ -1,0 +1,51 @@
+
+<div *ngIf="loader" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+<section class="leftsidebar">
+  <mat-accordion class="menunav">
+    <div class="module" [routerLinkActive]="'active'">
+      <!-- <div class="sectionHeader">{{'DASHBOARD.SERVICES' | translate}}</div> -->
+      <mat-expansion-panel [disabled]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'20px'" [expandedHeight]="'48px'">
+          <mat-panel-title class="catalog_menu menuIcon">
+            <a routerLink="menu-items" routerLinkActive="current">
+              <span>Menu Items</span>
+            </a>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [disabled]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'20px'" [expandedHeight]="'48px'">
+          <mat-panel-title class="catalog_menu menuIcon">
+            <a routerLink="devices" routerLinkActive="current">
+              <span>Devices</span>
+            </a>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel [disabled]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'20px'" [expandedHeight]="'48px'">
+          <mat-panel-title class="catalog_menu menuIcon">
+            <a routerLink="schedule-menus" routerLinkActive="current">
+              <span>Schedule Menus</span>
+            </a>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+
+    </div>
+  </mat-accordion>
+
+  <div class="fixedfooter">
+    <div class="locationWrap" (click)="getBusinessCenter()">
+      <span>
+        <mat-icon fontSet="material-icons-outlined">location_on</mat-icon>
+        <span>{{businessCentersDetail?.title}}</span>
+      </span>
+      <mat-icon>chevron_right</mat-icon>
+    </div>
+  </div>
+</section>

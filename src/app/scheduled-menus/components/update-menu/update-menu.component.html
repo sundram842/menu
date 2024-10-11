@@ -1,0 +1,92 @@
+<div *ngIf="loader" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+
+<h1 *ngIf="!loader" matDialogTitle>Update Menu Schedule <a [mat-dialog-close] class="customclosebtn"><em></em><em></em></a></h1>
+<mat-dialog-content *ngIf="menuDetail">
+  <mat-stepper linear #stepper class="customstepper" (selectionChange)="onStepChange($event)">
+    <mat-step [completed]="scheduleForm.valid">
+      <form [formGroup]="scheduleForm">
+        <div class="stpebody">
+          <ng-template matStepLabel>Details</ng-template>
+          <section class="menunameSection">
+            <h4 class=sectionHeader>Menu Details</h4>
+            <mat-form-field appearance="outline"  class="w-full">
+              <mat-label>Enter menu name</mat-label>
+              <input matInput formControlName="name" placeholder="" required>
+              <mat-icon matSuffix>restaurant_menu</mat-icon>
+              <mat-error *ngIf="scheduleForm?.controls?.name?.invalid">
+                {{ getErrorMessage(scheduleForm.controls.name, 'Menu name') }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Description</mat-label>
+              <textarea matInput  formControlName="description" placeholder="Menu Description"></textarea>
+            </mat-form-field>
+          </section>
+          <section class="selectDateWrap">
+            <h4 class=sectionHeader>Select Dates</h4>
+            <div>
+              <mat-form-field appearance="outline" class="w-50">
+                <mat-label>Choose a date</mat-label>
+                <input 
+                  matInput 
+                  formControlName="availableDates" 
+                  [matDatepicker]="picker" 
+                  (dateInput)="addDate($event.value)">
+                
+                <mat-hint>MM/DD/YYYY</mat-hint> <!-- Can be helpful for users -->
+                
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="scheduleForm?.controls?.availableDates?.invalid">
+                  {{ getErrorMessage(scheduleForm.controls.availableDates, 'Date') }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+            
+            <div *ngIf="selectedDates.length > 0" class="selectedDatesChipsWrap">
+              <h4>Menu Available Dates</h4>
+              <mat-chip-set>
+                <mat-chip *ngFor="let date of selectedDates; let i = index" (removed)="removeDate()">
+                  {{ date | date: 'MM/dd/yyyy' }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-set>
+            </div>
+          </section>
+        </div>
+        <div class="steperbottom">
+          <button mat-raised-button [disabled]="!scheduleForm.valid" color="primary" class="float-right" matStepperNext>
+            <!-- {{ 'LOGIN.NEXT' | translate }} -->
+            Next
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [completed]="selectedItemsForSchedule?.length ?? 0 > 0">
+      <form>
+        <div class="stpebody">
+          <ng-template matStepLabel>Add Menu Items</ng-template>
+          <app-menu-list-common *ngIf="menuItems" [displayedColumns]="displayedColumns" [menuDetails]="menuItems" [defaultSelection]="selectedMenuItems" (scheduleSelectedItems)="handle($event)" (updatedQuantities)="selectedItems = $event"/>
+        </div>
+        <div class="steperbottom">
+          <button mat-stroked-button color="primary" matStepperPrevious class="float-left">Back</button>
+          <button mat-raised-button [disabled]="!selectedItemsForSchedule?.length" color="primary" class="float-right" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form>
+        <div class="stpebody">
+          <ng-template matStepLabel>Inventory / Stock</ng-template>
+          <app-menu-list-common *ngIf="selectedItemsForSchedule?.length" [displayedColumns]="displayedColumnsTwo" [menuDetails]="selectedItemsForSchedule ? selectedItemsForSchedule : []" [readonly]="true" (updatedQuantities)="selectedItems = $event" [defaultSelection]="selectedMenuItems"/>
+        </div>
+        <div class="steperbottom">
+          <button mat-stroked-button color="primary" matStepperPrevious class="float-left">Back</button>
+          <button mat-raised-button color="primary" [disabled]="!selectedItems?.length" (click)="updateMenu()"  class="float-right">Update Menu</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>

@@ -1,0 +1,84 @@
+<div  *ngIf="loading" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+<div class="termDetailsContainer">
+    <div class="termDetailsWrapper">
+      <p class="basicDetails">
+        <!-- {{ 'DEVICES.BASIC_DETAILS' | translate }} -->
+          Basic details
+      </p>
+      <div class="termSummaryDetails">
+        <p class="titleText">
+          <!-- {{ 'DEVICES.NAME' | translate }} -->
+            Name
+        </p>
+        <p class="titleContent">{{(deviceDetails?.name| titlecase) ?? '-'}}</p>
+      </div>
+      <div class="termSummaryDetails">
+        <p class="titleText">
+          <!-- {{ 'DEVICES.BRAND' | translate }} -->
+            Brand
+        </p>
+        <p class="titleContent">{{(deviceDetails?.make | titlecase) ?? '-'}}</p>
+      </div>
+      <div class="termSummaryDetails">
+        <p class="titleText">
+          <!-- {{ 'DEVICES.MODEL' | translate }} -->
+            Model
+        </p>
+        <p class="titleContent">{{(deviceDetails?.model | titlecase) ?? '-'}}</p>
+      </div>
+      <div class="termSummaryDetails">
+        <p class="titleText">
+          <!-- {{ 'DEVICES.CREATED_AT' | translate }} -->
+            Created At
+        </p>
+        <p class="titleContent">{{(deviceDetails?.dateOfInstallation | date: 'MMM dd, yyyy') ?? '-'}}</p>
+      </div>
+      <div class="termSummaryDetails">
+        <p class="titleText">
+          <!-- {{ 'DEVICES.STATUS' | translate }} -->
+            Status
+        </p>
+        <p class="titleContent">{{(deviceDetails?.status | titlecase) ?? '-'}}</p>
+      </div>
+      <div class="termSummaryDetails">
+        <p class="titleText">
+          <!-- {{ 'DEVICES.BUSINESS_CENTER_LOCATION' | translate }} -->
+            Business center location
+        </p>
+        <p class="titleContent">{{(deviceDetails?.businessCenter?.location ?? '-') | titlecase}}</p>
+      </div>
+    </div>
+    <div>
+      <button class="add-btn-details" (click)="upadateDevice(deviceId)">
+        <span>
+          <!-- {{"DEVICES.EDIT"| translate}} -->
+           Edit
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="termDetailsContainer">
+    <div class="termDetailsWrapper">
+      <p class="basicDetails">
+        <!-- {{ 'DEVICES.POS_CLIENTS' | translate }} -->
+          Pos clients
+      </p>
+      <div class="termSummaryDetails">
+        <p class="titleText">
+          <!-- {{ 'DEVICES.CLIENT' | translate }} -->
+          Client
+        </p>
+        <p class="titleContent">{{(deviceDetails?.posClient?.name ?? '-') | titlecase}}</p>
+      </div>
+    </div>
+    <div>
+      <!-- <button class="add-btn-details" (click)="editDetails()">
+        <span>{{"DEVICES.EDIT"| translate}}</span>
+      </button> -->
+    </div>
+  </div>
+  
+  

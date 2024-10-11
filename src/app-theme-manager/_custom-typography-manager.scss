@@ -1,0 +1,25 @@
+$my-typography: mat.m2-define-typography-config(
+  $font-family: var(--custom-font),
+);
+@include mat.typography-hierarchy($my-typography);
+@include mat.button-typography($my-typography);
+@include mat.dialog-typography($my-typography);
+@include mat.table-typography($my-typography);
+@include mat.stepper-typography($my-typography);
+@include mat.checkbox-typography($my-typography);
+@include mat.radio-typography($my-typography);
+@include mat.select-typography($my-typography);
+@include mat.menu-typography($my-typography);
+@include mat.list-typography($my-typography);
+@include mat.form-field-typography($my-typography);
+@include mat.input-typography($my-typography);
+@include mat.option-typography($my-typography);
+@include mat.paginator-typography($my-typography);
+@include mat.sidenav-typography($my-typography);
+@include mat.slide-toggle-typography($my-typography);
+@include mat.snack-bar-typography($my-typography);
+@include mat.tooltip-typography($my-typography);
+@include mat.tree-typography($my-typography);
+// @include mat.sort-header-typography($my-typography);
+// @include mat.chip-typography($my-typography);
+// @include mat.tab-group-typography($my-typography);

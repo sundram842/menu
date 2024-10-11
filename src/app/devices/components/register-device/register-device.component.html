@@ -1,0 +1,216 @@
+<div *ngIf="loader" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+<h2 mat-dialog-title>
+    <!-- {{ 'DEVICES.REGISTER_DEVICE' | translate }} -->
+     {{deviceDetails ? 'Update device' : 'Register device'}}
+    <a [mat-dialog-close]><em></em><em></em></a>
+  </h2>
+<form [formGroup]="registerDeviceForm" (ngSubmit)="creatDevice()">
+    <mat-dialog-content>
+      <ng-container *ngIf="deviceDetails && !registerDevice">
+          <!-- Device Name -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.NAME' | translate }} -->
+          Device name
+        </mat-label>
+        <input matInput formControlName="deviceName"/>
+        <mat-error *ngIf="registerDeviceForm?.controls?.deviceName?.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.deviceName,  ' Device name')
+          }}
+        </mat-error>
+      </mat-form-field>
+      <!-- IP Address -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.IP_ADDRESS' | translate }} -->
+            IP address
+        </mat-label>
+        <input matInput formControlName="ipAddress"/>
+        <mat-error *ngIf="registerDeviceForm.controls.ipAddress.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.ipAddress, ' IP address')
+          }}
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- MAC Address -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.MAC_ADDRESS' | translate }} -->
+            Mac address
+        </mat-label>
+        <input matInput formControlName="macAddress" />
+        <mat-error *ngIf="registerDeviceForm.controls.macAddress.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.macAddress, ' Mac address')
+          }}
+        </mat-error>
+      </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngIf="!deviceDetails && registerDevice">
+        <mat-form-field appearance="outline">
+          <mat-label>
+            <!-- {{ 'DEVICES.NAME' | translate }} -->
+              Device name
+          </mat-label>
+          <input matInput formControlName="deviceName" required />
+          <mat-error *ngIf="registerDeviceForm?.controls?.deviceName?.invalid">
+            {{
+            getErrorMessage(registerDeviceForm.controls.deviceName, 'Device name')
+            }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.SELECT_TYPE' | translate }} -->
+          Select device type
+        </mat-label>
+        <mat-select formControlName="type" required>
+          <mat-option value="mobile" *ngFor="let type of types" [value]="type.key">{{type.value}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="registerDeviceForm.controls.type.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.type, 'Select device type')
+          }}
+        </mat-error>
+      </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>
+            <!-- {{ 'DEVICES.SELECT_POS_CLIENTS' | translate }} -->
+            Select pos client
+          </mat-label>
+          <mat-select formControlName="posClientId" required>
+            <mat-option value="mobile" *ngFor="let client of posClients" [value]="client.id">{{client.displayName}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="registerDeviceForm.controls.type.invalid">
+            {{
+            getErrorMessage(registerDeviceForm.controls.type, 'Select pos client')
+            }}
+          </mat-error>
+        </mat-form-field>
+  
+      <!-- Make -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.BRAND' | translate }} -->
+            Brand
+        </mat-label>
+        <input matInput formControlName="make" required />
+        <mat-error *ngIf="registerDeviceForm.controls.make.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.make, 'Brand')
+          }}
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Model -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.MODEL' | translate }} -->
+            Model
+        </mat-label>
+        <input matInput formControlName="model" required />
+        <mat-error *ngIf="registerDeviceForm.controls.model.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.model, 'Model')
+          }}
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Device Serial Number -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.SERIAL_NUMBER' | translate }} -->
+            Serial number
+        </mat-label>
+        <input matInput formControlName="deviceSerialNumber" required />
+        <mat-error *ngIf="registerDeviceForm.controls.deviceSerialNumber.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.deviceSerialNumber, 'Serial number')
+          }}
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Firmware Version -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.FIRMWARE_VERSION' | translate }} -->
+            Fireware version
+        </mat-label>
+        <input matInput formControlName="firmwareVersion" required />
+        <mat-error *ngIf="registerDeviceForm.controls.firmwareVersion.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.firmwareVersion, 'Fireware version')
+          }}
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Connection Type -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.CONNECTION_TYPE' | translate }} -->
+            Connection type
+        </mat-label>
+        <input matInput formControlName="connectionType" required />
+        <mat-error *ngIf="registerDeviceForm.controls.connectionType.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.connectionType,  'Connection type')
+          }}
+        </mat-error>
+      </mat-form-field>
+      <!-- IP Address -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.IP_ADDRESS' | translate }} -->
+            Ip address
+        </mat-label>
+        <input matInput formControlName="ipAddress" required />
+        <mat-error *ngIf="registerDeviceForm.controls.ipAddress.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.ipAddress, 'Ip address')
+          }}
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- MAC Address -->
+      <mat-form-field appearance="outline">
+        <mat-label>
+          <!-- {{ 'DEVICES.MAC_ADDRESS' | translate }} -->
+            Mac address
+        </mat-label>
+        <input matInput formControlName="macAddress" required />
+        <mat-error *ngIf="registerDeviceForm.controls.macAddress.invalid">
+          {{
+          getErrorMessage(registerDeviceForm.controls.macAddress, 'Mac address')
+          }}
+        </mat-error>
+      </mat-form-field>
+        <mat-form-field appearance="outline" *ngIf="!deviceDetails">
+          <mat-label>
+            <!-- {{ 'DEVICES.OS_COMPATIBILITY' | translate }} -->
+              Os compatibility
+          </mat-label>
+          <input matInput formControlName="osCompatibility"/>
+          <mat-error *ngIf="registerDeviceForm.controls.osCompatibility.invalid">
+            {{
+            getErrorMessage(registerDeviceForm.controls.osCompatibility, 'Os compatibility')
+            }}
+          </mat-error>
+        </mat-form-field>
+       </ng-container>
+  
+    </mat-dialog-content>
+  
+    <!-- Submit Button -->
+    <mat-dialog-actions align="end">
+      <button mat-raised-button type="submit" color="primary" [disabled]="!registerDeviceForm.valid">
+        <!-- {{ deviceDetails ? ('DEVICES.UPDATE' | translate) :( 'DEVICES.REGISTER' | translate) }} -->
+        {{ deviceDetails ? 'Update device' : 'Register device' }}
+      </button>
+    </mat-dialog-actions>
+  </form>
+  

@@ -1,0 +1,103 @@
+<form [formGroup]="filterForm" class="datefilter">
+  <div class="flitercontainer">
+    <div class="filterlabel">Captured At: &nbsp;</div>
+    <div class="txt_content">
+      <div>
+        <ng-container *ngIf="filterForm.value.start_time">
+          {{
+            filterForm.value.start_time | date : 'mm/dd/yyyy, HH:mm:ss'
+          }}</ng-container
+        >
+        <!-- <ng-container *ngIf="!filterForm.value.start_time">
+               From
+
+            </ng-container> -->
+      </div>
+      <mat-form-field floatLabel="never">
+        <input
+          matInput
+          placeholder="From"
+          formControlName="start_time"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker
+          [enableMeridian]="true"
+          #picker
+        ></ngx-mat-datetime-picker>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div *ngIf="filterForm.value.start_time">
+    <span class="devide">To</span>
+    <div class="flitercontainer">
+      <div class="txt_content">
+        <div>
+          <ng-container *ngIf="filterForm.value.end_time">
+            {{ filterForm.value.end_time | date : 'mm/dd/yyyy, HH:mm:ss' }}
+          </ng-container>
+          <!-- <ng-container *ngIf="!filterForm.value.end_time">
+               To
+            </ng-container> -->
+        </div>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="TO"
+            formControlName="end_time"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="endpicker"
+            #todatetoggle
+          ></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker
+            [enableMeridian]="true"
+            #endpicker
+          ></ngx-mat-datetime-picker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <!-- <mat-form-field>
+        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" [formControl]="dateControl"
+           [min]="minDate" [max]="maxDate" [disabled]="disabled">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #picker [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+           [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond">
+        </ngx-mat-datetime-picker>
+     </mat-form-field> -->
+
+  <!-- <mat-form-field *ngIf="filterForm.controls.date">
+        <ng-container *ngIf="isDateTimePickerControl">
+            <input matInput [matDatepicker]="picker" placeholder="{{ translateEntityMap[entity] + '.' + 'date' | translate }}" formControlName="date">
+          
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </ng-container>
+        <ng-container *ngIf="isTimePickerControl">
+            <mat-label>{{ translateEntityMap[entity] + '.' + 'date' | translate }}</mat-label>
+            <mat-select formControlName="date" required>
+                <mat-option [value]="today">
+                    {{'Today'}}
+                </mat-option>
+                <mat-option [value]="yesterday">
+                    {{'Yesterday'}}
+                </mat-option>
+            </mat-select>
+         
+        </ng-container>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="time" placeholder="{{ translateEntityMap[entity] + '.' + 'start_time' | translate }}"
+            formControlName="start_time" />
+        
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="time" placeholder="{{ translateEntityMap[entity] + '.' + 'end_time' | translate }}"
+            formControlName="end_time" />
+        
+    </mat-form-field> -->
+</form>

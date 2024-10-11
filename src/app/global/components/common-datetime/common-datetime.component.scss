@@ -1,0 +1,82 @@
+$color: var(--custom-primary-color);
+.mat-form-field {
+  margin-right: 10px;
+  width: 200px;
+}
+.datefilter {
+  & label {
+  }
+}
+
+.devide {
+  float: left;
+  padding: 4px 5px 0 10px;
+  font-family: 'robotomedium', sans-serif;
+}
+.filterlabel {
+  color: #aaabad;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+form {
+  display: flex;
+  width: auto;
+  background: #f5f6f8;
+
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.flitercontainer {
+  background: #f5f6f8;
+  color: #4e6583;
+  padding: 5px 5px;
+  border-radius: 3px;
+  display: flex;
+  position: relative;
+
+  .txt_content {
+    position: relative;
+    padding-right: 10px;
+    & div,
+    & input {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    & div {
+      visibility: hidden;
+    }
+
+    & input1,
+    & mat-form-field {
+      width: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 14px;
+    }
+  }
+
+  &.active {
+    background: $color;
+    border-color: #7d889b;
+    & label {
+      font-family: 'robotomedium', sans-serif;
+      color: #fff;
+      font-size: 14px;
+      line-height: 19px;
+      margin-right: 5px;
+    }
+    & .txt_content {
+      & * {
+        color: #fff;
+        font-size: 14px;
+      }
+    }
+  }
+}

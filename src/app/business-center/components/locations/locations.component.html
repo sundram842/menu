@@ -1,0 +1,73 @@
+<div *ngIf="loader" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+<h2 mat-dialog-title class="dialog-header" *ngIf="!loader">
+  <ng-container *ngIf="businessCenters?.length">
+      {{ 'BUSINESS_CENTER.TITLE' | translate }}
+  </ng-container>
+  <ng-container *ngIf="menuItems?.length">
+    {{ 'DEVICES.ASSIGN_ITEM' | translate }}
+</ng-container>
+  <a [mat-dialog-close]><em></em><em></em></a>
+</h2>
+<mat-dialog-content *ngIf="businessCenters?.length|| availableMenuItems?.length">
+  <section class="location-scroll">
+      <div class="add-new-student">
+          <div>
+              <p class="switch-location" *ngIf="businessCenters?.length">
+                  {{'BUSINESS_CENTER.CHANGE_LOCATION_HEADER' | translate}}
+              </p>
+              <p class="switch-location" *ngIf="availableMenuItems?.length">
+                {{'DEVICES.SELECT_ASSIGN_ITEMS' | translate}}
+            </p>
+          </div>
+      </div>
+      <ng-container>
+          <form [formGroup]="businessCentersForm">
+          <ul>
+              <mat-radio-group [formControlName]="'location'" *ngIf="businessCenters">
+              <li class="formFieldRadioGrp" *ngFor="let item of businessCenters">
+                  <mat-radio-button color="primary" class="formFieldRadioBtn" [value]="item.id">
+                      <div class="locationWrapper">
+                          <span class="location-name">
+                              {{item.title}}
+                          </span>
+                      </div>
+
+                      <div>
+                          <span class="loc-address">
+                              {{item.address.displayName}}
+                          </span>
+                      </div>
+                  </mat-radio-button>
+              </li>
+          </mat-radio-group>
+          <mat-selection-list [formControlName]="'items'" *ngIf="availableMenuItems">
+              <li class="formFieldCheckboxGrp" *ngFor="let item of availableMenuItems">
+                <mat-checkbox class="formFieldCheckboxBtn" [value]="item.id">
+                  <div class="locationWrapper">
+                    <span class="location-name">
+                      {{ item.displayName }}
+                    </span>
+                  </div>
+                  <div>
+                    <span class="loc-address">
+                      {{ item.name }}
+                    </span>
+                  </div>
+                </mat-checkbox>
+              </li>
+            </mat-selection-list>
+            
+          </ul>
+      </form>
+      </ng-container>
+  </section>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" *ngIf="this.businessCenters?.length || this.menuItems?.length">
+  <button mat-flat-button [disabled]="!chooseLocation" (click)="changeLocation()">
+  {{ businessCenters ? ('BUSINESS_CENTER.ASSIGN' | translate) : ('DEVICES.ASSIGN_ITEM')}}
+</button>
+</mat-dialog-actions>

@@ -1,0 +1,368 @@
+@layer utilities {
+  // display utils
+  .d-none {
+    display: none;
+  }
+
+  .d-block {
+    display: block;
+  }
+
+  .d-inline {
+    display: inline;
+  }
+
+  .d-inline-block {
+    display: inline-block;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .d-inline-flex {
+    display: inline-flex;
+  }
+
+  .d-grid {
+    display: grid;
+  }
+
+  //text utils
+  .text-left {
+    text-align: left;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  .text-justify {
+    text-align: justify;
+  }
+
+  // Flex direction utilities
+  .flex-row {
+    flex-direction: row;
+  }
+
+  .flex-column {
+    flex-direction: column;
+  }
+
+  // Align items utilities
+  .align-start {
+    align-items: flex-start;
+  }
+
+  .align-center {
+    align-items: center;
+  }
+
+  .align-end {
+    align-items: flex-end;
+  }
+
+  .align-baseline {
+    align-items: baseline;
+  }
+
+  .align-stretch {
+    align-items: stretch;
+  }
+
+  // Justify content utilities
+  .justify-start {
+    justify-content: flex-start;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  .justify-end {
+    justify-content: flex-end;
+  }
+
+  .justify-between {
+    justify-content: space-between;
+  }
+
+  .justify-around {
+    justify-content: space-around;
+  }
+
+  .justify-evenly {
+    justify-content: space-evenly;
+  }
+
+  .float-left {
+    float: left;
+  }
+
+  .float-right {
+    float: right;
+  }
+
+  .float-none {
+    float: none;
+  }
+
+  // Clearfix utility to clear floats
+  .clearfix::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+
+  // Height utilities
+  .h-auto {
+    height: auto;
+  }
+
+  .h-full {
+    height: 100%;
+  }
+
+  .h-screen {
+    height: 100vh;
+  }
+
+  .h-50 {
+    height: 50%;
+  }
+
+  //width utils
+  .w-auto {
+    width: auto;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .w-screen {
+    width: 100vw;
+  }
+
+  .w-50 {
+    width: 50%;
+  }
+
+  .w-25 {
+    width: 25%;
+  }
+
+  .w-75 {
+    width: 75%;
+  }
+}
+
+@layer overflow-utilities {
+  // overflow utils
+  .overflow-auto {
+    overflow: auto;
+  }
+
+  .overflow-hidden {
+    overflow: hidden;
+  }
+
+  .overflow-visible {
+    overflow: visible;
+  }
+
+  .overflow-scroll {
+    overflow: scroll;
+  }
+
+  .overflow-x-auto {
+    overflow-x: auto;
+  }
+
+  .overflow-x-hidden {
+    overflow-x: hidden;
+  }
+
+  .overflow-x-visible {
+    overflow-x: visible;
+  }
+
+  .overflow-x-scroll {
+    overflow-x: scroll;
+  }
+
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
+
+  .overflow-y-hidden {
+    overflow-y: hidden;
+  }
+
+  .overflow-y-visible {
+    overflow-y: visible;
+  }
+
+  .overflow-y-scroll {
+    overflow-y: scroll;
+  }
+}
+
+@layer position-utilities {
+  // position utils
+  .position-static {
+    position: static;
+  }
+
+  .position-relative {
+    position: relative;
+  }
+
+  .position-absolute {
+    position: absolute;
+  }
+
+  .position-fixed {
+    position: fixed;
+  }
+
+  .position-sticky {
+    position: sticky;
+  }
+
+  // top, right, bottom, left utils
+  .top-0 {
+    top: 0;
+  }
+
+  .top-50 {
+    top: 50%;
+  }
+
+  .top-100 {
+    top: 100%;
+  }
+
+  .right-0 {
+    right: 0;
+  }
+
+  .right-50 {
+    right: 50%;
+  }
+
+  .right-100 {
+    right: 100%;
+  }
+
+  .bottom-0 {
+    bottom: 0;
+  }
+
+  .bottom-50 {
+    bottom: 50%;
+  }
+
+  .bottom-100 {
+    bottom: 100%;
+  }
+
+  .left-0 {
+    left: 0;
+  }
+
+  .left-50 {
+    left: 50%;
+  }
+
+  .left-100 {
+    left: 100%;
+  }
+
+  // z-index utils
+  .z-0 {
+    z-index: 0;
+  }
+
+  .z-10 {
+    z-index: 10;
+  }
+
+  .z-20 {
+    z-index: 20;
+  }
+
+  .z-30 {
+    z-index: 30;
+  }
+
+  .z-auto {
+    z-index: auto;
+  }
+}
+
+@layer statusChips {
+  $chipRadius: 4px;
+  $padStyle: 2px 8px;
+  $textSize: 12px;
+  $colors: (
+    'greenChip': (
+      var(--greenBackground),
+      var(--greenText),
+      var(--greenBorder),
+    ),
+    'blueChip': (
+      var(--blueBackground),
+      var(--blueText),
+      var(--blueBorder),
+    ),
+    'redChip': (
+      var(--redBackground),
+      var(--redText),
+      var(--redBorder),
+    ),
+    'orangeChip': (
+      var(--orangeBackground),
+      var(--orangeText),
+      var(--orangeBorder),
+    ),
+    'grayChip': (
+      var(--grayBackground),
+      var(--grayText),
+      var(--color14),
+    ),
+    'saffronChip': (
+      var(--saffranBackground),
+      var(--saffranText),
+      var(--safranBorder),
+    ),
+    'yellowChip': (
+      var(--yellowBackground),
+      var(--yellowText),
+      var(--yellowBorder),
+    ),
+  );
+
+  @each $class, $values in $colors {
+    $bgColor: nth($values, 1);
+    $textColor: nth($values, 2);
+    $boderColor: nth($values, 3);
+
+    .#{$class} {
+      padding: $padStyle;
+      background-color: $bgColor;
+      color: $textColor;
+      vertical-align: middle !important;
+      text-align: center;
+      font-size: $textSize;
+      text-transform: capitalize;
+      border: 1px solid $boderColor;
+      @include border-radius($chipRadius);
+    }
+  }
+}

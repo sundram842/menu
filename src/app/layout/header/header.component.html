@@ -1,0 +1,114 @@
+<!--? Main Header-->
+<div *ngIf="loader" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+<header>
+  <section class="mainheader">
+    <div class="logowrap">
+      <img
+        class="logo"
+        src="{{ partnerLogo }}"
+        title="Company Logo"
+        loading="lazy"
+      />
+    </div>
+    <div>
+      <h1 class="pagetitle">
+        {{ headerContent.title }}
+        <!-- <span *ngIf="headerContent.count && headerContent.count > 0"
+          >({{ headerContent.count }})</span
+        > -->
+      </h1>
+    </div>
+
+    <div class="userdata">
+      <span class="notificationsIconWrap">
+        <button mat-icon-button aria-label="notificationBell">
+          <!-- TODO: Need to add enum -->
+          <mat-icon
+            *ngIf="businessCentersDetail?.status === headerConstant.PAUSE"
+            (click)="playBusinessCenter()"
+          >
+            play_circle_outline
+          </mat-icon>
+          <mat-icon class="material-icons-outlined" *ngIf="businessCentersDetail?.status === headerConstant.ACTIVE"
+            (click)="pauseBusinessCenter()">
+            pause_circle
+          </mat-icon>
+        </button>
+      </span>
+      <span class="usericon" (click)="toggleSidebar()">
+        <!-- {{
+        user?.displayLetters | uppercase
+      }} -->
+        <mat-icon>person</mat-icon>
+      </span>
+
+      <!-- <mat-menu #menu="matMenu"> -->
+
+      <!-- <a routerLink="" (click)="changePassword()" mat-menu-item><mat-icon fontSet="material-icons-outlined">lock</mat-icon> {{
+          'HEADERS.CHANGE_PASSWORD' | translate
+        }}</a> -->
+      <!-- <a mat-menu-item><mat-icon>logout</mat-icon> Logout</a> -->
+
+      <!-- </mat-menu> -->
+    </div>
+  </section>
+</header>
+
+<!--? Profile Sidebar-->
+<section class="profileBar">
+  <!-- Offcanvas content -->
+  <div [ngClass]="{ profilecanvas: true, open: isprofileOpen }">
+    <div class="responsiveProfileWraper">
+      <div class="contentWraper">
+        <div class="topPart">
+          <span class="draWerClose" (click)="toggleSidebar()"
+            ><mat-icon>close</mat-icon></span
+          >
+          <div class="profileImageWrap">
+            <!-- <img src={companyLogo} alt="profile" loading='lazy' /> -->
+            <!--? Display First and Last Charaters of profile name-->
+            <h1>{{ userDetails?.firstName?.[0] | uppercase
+              }}{{ userDetails?.lastName?.[0] | uppercase }}</h1>
+          </div>
+          <div class="details">
+            <!--? Display profile name-->
+            <p>{{ userDetails?.firstName }} {{ userDetails?.lastName }}</p>
+
+            <p>
+              <span
+                ><mat-icon fontSet="material-icons-outlined"
+                  >mail</mat-icon
+                ></span
+              >
+              {{ userDetails?.email ?? '-' }}
+            </p>
+            <p>
+              <span
+                ><mat-icon fontSet="material-icons-outlined"
+                  >phone</mat-icon
+                ></span
+              >
+              {{ userDetails?.phoneNumber ?? '-' }}
+            </p>
+          </div>
+        </div>
+        <div class="bottomPart">
+          <div class="menuItem">
+            <!-- <a (click)="changePassword()"><span><mat-icon>lock</mat-icon></span><span>{{"HEADER.CHANGE_PASSWORD"|
+                                  translate}}</span></a> -->
+          </div>
+        </div>
+        <div class="footer">
+          <p (click)="logout()">
+            <mat-icon>logout</mat-icon
+            ><span>{{ 'HEADERS.LOGOUT' | translate }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Backdrop -->
+  <div class="sidebar_backdrop" [ngClass]="{ open: isprofileOpen }"></div>
+</section>

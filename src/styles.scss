@@ -1,0 +1,1459 @@
+@import './app-theme-manager/org-custom-imports';
+/* ============================================================
+              Global Styles
+=============================================================== */
+
+html,
+body {
+  @extend .h-full;
+  font-family: var(--custom-font) !important;
+}
+
+body {
+  background-color: var(--color1);
+  @extend .w-full;
+  @include zeromargin;
+  @include zeropadding;
+
+  .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+    background-color: var(--color5);
+  }
+
+  span.mdc-evolution-chip__text-label.mat-mdc-chip-action-label {
+    font-family: var(--custom-font) !important;
+    @include font-style(regular, medium);
+  }
+
+  .actionWrap {
+    .mdc-button {
+      height: 45px;
+    }
+  }
+
+  .mat-primary.mat-mdc-raised-button,
+  .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled)
+    .mdc-evolution-chip__checkmark,
+  .mat-mdc-standard-chip.mdc-evolution-chip--selected:not(
+      .mdc-evolution-chip--disabled
+    )
+    .mdc-evolution-chip__text-label {
+    color: var(--color1);
+  }
+}
+
+* {
+  box-sizing: border-box;
+
+  ::after,
+  ::before {
+    box-sizing: border-box;
+  }
+
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar style */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color5);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color4);
+  @include border-radius(0px);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color12);
+}
+
+/* ============================================================
+                 Layout
+=============================================================== */
+.mainwrapper {
+  @extend .float-left;
+  @extend .w-full;
+  padding-left: 200px;
+}
+
+.main-content {
+  @extend .w-full;
+  @extend .float-left;
+  max-height: calc(100vh - 80px);
+  @extend .overflow-auto;
+  padding: 30px;
+}
+
+/* ============================================================
+                 Main Header
+=============================================================== */
+
+header {
+  @extend .position-relative;
+  z-index: 99;
+  box-shadow: var(--headerShadow);
+  background: var(--color1);
+  min-height: 80px;
+  @include zeropadding;
+
+  .logo {
+    margin: 0px 0 0 10px;
+    width: 160px;
+  }
+}
+
+.mainheader {
+  @extend .align-center;
+
+  & .userdata {
+    margin-left: auto;
+    padding-right: 30px;
+
+    & span.usericon {
+      width: 40px;
+      height: 40px;
+      @include border-radius(50%);
+      @extend .d-flex;
+      @extend .align-center;
+      @extend .justify-center;
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      background-color: var(--secondary-color);
+      cursor: pointer;
+    }
+  }
+}
+
+.mainheader {
+  @extend .d-flex;
+  @extend .w-full;
+  padding-left: 20px;
+
+  & div {
+    &:first-child {
+      width: 180px;
+      padding-left: 0px;
+    }
+
+    h1.pagetitle {
+      padding: 20px 0 0 30px;
+      @include font-style(x-large, semibold);
+    }
+  }
+
+  .userdata {
+    @include flexwithcenter;
+
+    span.notificationsIconWrap {
+      margin: 12px 50px 0 0;
+      background: none;
+
+      button {
+        color: var(--color25);
+      }
+    }
+  }
+}
+
+.mainheader {
+  & .userdata {
+    & span {
+      // background: var(--color1);
+    }
+  }
+}
+
+/* ============================================================
+                 Side Navigation bar
+=============================================================== */
+.leftsidebar {
+  & .menunav {
+    & .mat-expansion-panel {
+      @extend .w-full;
+      margin-bottom: 15px;
+    }
+
+    :nth-child(n):not(:first-child) {
+      margin-top: 10px;
+    }
+
+    .module {
+      padding: 14px 20px 14px 20px;
+      border: 1px solid var(--color38);
+      @include border-radius(14px);
+
+      .sectionHeader {
+        @include font-style(small, regular);
+        color: var(--color25);
+        text-transform: uppercase;
+        letter-spacing: 0.72px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .module:hover {
+      @include border-radius(14px);
+      background-color: var(--color28);
+
+      .mat-expansion-panel {
+        background-color: var(--color28);
+      }
+    }
+
+    .module.active {
+      background-color: var(--color15);
+      @include border-radius(14px);
+      border: none;
+      .mat-expansion-panel {
+        background-color: var(--color15);
+      }
+    }
+  }
+
+  .fixedfooter {
+    .locationWrap {
+      @extend .d-flex;
+      @extend .align-center;
+      @extend .justify-between;
+      color: var(--color17);
+
+      :nth-child(1) {
+        @extend .d-flex;
+        @extend .align-center;
+        column-gap: 8px;
+      }
+    }
+  }
+}
+
+.leftsidebar {
+  @extend .position-fixed;
+  top: 80px;
+  @extend .left-0;
+  @extend .bottom-0;
+  width: 200px;
+  color: var(--color2);
+  background: var(--color1);
+  box-shadow: var(--sideBarShadow);
+  padding: 20px 8px;
+}
+
+.leftsidebar {
+  & ul,
+  & li {
+    @include zeromargin;
+    @include zeropadding;
+    list-style: none;
+  }
+}
+
+.leftsidebar {
+  .mat-expansion-panel:not([class*='mat-elevation-z']) {
+    box-shadow: none;
+  }
+
+  & .mat-expansion-panel-header {
+    padding: 0 0 0 10px;
+
+    &.hassubmenu {
+      padding-right: 24px;
+    }
+  }
+
+  .mat-accordion .mat-expansion-panel:first-of-type,
+  .mat-accordion .mat-expansion-panel:last-of-type {
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    -ms-border-radius: 0 !important;
+    -o-border-radius: 0 !important;
+  }
+
+  & mat-panel-title {
+    margin-right: 0;
+
+    & > a {
+      padding: 0px 10px 0px 10px;
+      @extend .float-left;
+      @extend .w-full;
+      font-size: map-get($font-sizes, small) + 1;
+      font-weight: map-get($font-weights,regular);
+      color: var(--color12) !important;
+      border-left: 3px solid var(--color12);
+      text-decoration: none;
+
+      &.current {
+        // background: var(--color1);
+        color: var(--primary-color) !important;
+        border-color: var(--primary-color);
+      }
+
+      &:hover {
+        border-color: var(--primary-color);
+        // background-color: transparent;
+      }
+    }
+  }
+}
+
+.fixedfooter {
+  @extend .position-fixed;
+  @extend .left-0;
+  @extend .bottom-0;
+  border: 1px solid var(--color20);
+  width: 182px;
+  z-index: 999;
+  padding: 10px 5px;
+  color: var(--color2);
+  cursor: pointer;
+  @include border-radius(4px);
+  margin: 20px 8px;
+}
+
+/* ============================================================
+                        Fallback
+=============================================================== */
+.pageLoader {
+  @extend .position-fixed;
+  @extend .top-0;
+  @extend .left-0;
+  @include fullheight;
+  @include fullwidth;
+  background-color: var(--overlay);
+  @include flexwithcenter;
+  z-index: 99999;
+  .custom-loader {
+    width: 100px;
+    height: 100px;
+    @extend .d-grid;
+    border: 8px solid #0000;
+    @include border-radius(50%);
+    border-color: var(--color1) #0000;
+    animation: s6 2s infinite linear;
+  }
+  .custom-loader::before,
+  .custom-loader::after {
+    content: '';
+    grid-area: 1/1;
+    margin: 4px;
+    border: inherit;
+    @include border-radius(50%);
+  }
+  .custom-loader::before {
+    border-color: var(--primary-color) #0000;
+    animation: inherit;
+    animation-duration: 1s;
+    animation-direction: reverse;
+  }
+  .custom-loader::after {
+    margin: 16px;
+  }
+
+  @keyframes s6 {
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+/* ============================================================
+                        Login
+=============================================================== */
+
+.loginSection {
+  @include flexwithcenter;
+  @include vpheight;
+  background-color: var(--color5) !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .loginWrap {
+    background-color: var(--color1) !important;
+    @include border-radius(8px);
+    width: 500px;
+    z-index: 2;
+    padding: 30px;
+    box-shadow: var(--emailboxshadow);
+    .title {
+      @include font-style(xx-large, semibold);
+      margin-bottom: 50px;
+    }
+
+    .otpInput {
+      .ng-otp-input-wrapper {
+        @include flex;
+        @extend .justify-center;
+        gap: 15px;
+        margin-bottom: 30px;
+        // .otp-input {s
+        //   width: 54px;
+        //   font-size: 30px;
+        // }
+      }
+    }
+    .numpad {
+      @extend .d-grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px 40px;
+      width: max-content;
+      margin: auto auto 40px auto;
+      .numpad-button {
+        @include border-radius(50%);
+        width: 60px;
+        height: 60px;
+        font-size: map-get($font-sizes, large);
+        // @include flexwithcenter;
+      }
+
+      .numpad-button.zero {
+        grid-column: 2 / 3;
+        /* Spans the second column */
+      }
+    }
+
+    .actions {
+      @include flex;
+      @extend .justify-between;
+      button {
+        min-width: 200px;
+        min-height: 48px;
+      }
+    }
+
+    .emailBox,
+    .passwordWraper {
+      padding: 30px 40px;
+
+      .logoWrap {
+        width: 170px;
+        height: 90px;
+        margin-bottom: 25px;
+
+        img {
+          @include fullwidth;
+          @include fullheight;
+        }
+      }
+
+      .inputWrap {
+        @include fullwidth;
+
+        .emailBackWrap {
+          cursor: pointer;
+          @include flex;
+          gap: 10px;
+          flex-wrap: wrap;
+          .mat-icon {
+            color: var(--color4);
+          }
+
+          margin-bottom: 20px;
+
+          span {
+            color: var(--color10);
+            padding: 4px 12px;
+            background-color: var(--color5);
+            @include border-radius(13px);
+          }
+        }
+
+        p {
+          @include font-style(x-large, medium);
+          color: var(--color7);
+          @include customFont;
+          @include textLeft;
+          margin-bottom: 13px;
+        }
+
+        p.userMsg {
+          margin: 0 0 20px 0;
+          @include font-style(regular, regular);
+          color: var(--color12);
+        }
+
+        p.guidelinesMSG {
+          @include guidelinesMSG;
+        }
+
+        ul.guidelinesList {
+          @include guidelinesList;
+        }
+
+        .emailInput {
+          @include fullwidth;
+          margin-bottom: 20px;
+        }
+
+        .customError {
+          margin-bottom: 15px;
+          @extend .d-block;
+        }
+
+        .resetCodeLink {
+          cursor: pointer;
+          margin-bottom: 20px;
+          @extend .text-right;
+          color: var(--color6);
+          @include font-style(regular, regular);
+          @extend .float-right;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .psdInput {
+          @include fullwidth;
+        }
+
+        .socialIconWrap {
+          margin-bottom: 25px;
+
+          p {
+            @include customFont;
+            @include font-style(medium, regular);
+            @include textcenter;
+            color: var(--color4);
+            margin: 0px 0px 25px 0px;
+          }
+
+          .iconWrap {
+            @include flexwithcenter;
+            gap: 20px 50px;
+
+            a {
+              color: var(--color2);
+
+              img {
+                width: 25px;
+                height: 25px;
+              }
+            }
+          }
+        }
+
+        .forGotpsd {
+          color: var(--color6);
+          @include font-style(regular, regular);
+          @extend .float-right;
+          margin-bottom: 15px;
+          text-decoration: none;
+          text-transform: capitalize;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        @include passwordGuideLines;
+
+        .guideLinesWrap {
+          margin: 0 0 25px 0;
+        }
+      }
+
+      .actionWrap {
+        @include fullwidth;
+
+        .ctnu-btn {
+          color: var(--color1) !important;
+          @include customFont;
+          @include font-style(medium, regular);
+          text-transform: capitalize;
+          @include fullwidth;
+          flex-direction: row-reverse;
+          @extend .align-center;
+          gap: 15px;
+          min-height: 48px;
+
+          .mat-icon {
+            margin-top: 3px;
+          }
+        }
+
+        .bact-btn {
+          margin-top: 30px;
+          @extend .text-center;
+          @include fullwidth;
+          color: var(--color12);
+        }
+      }
+    }
+
+    .footerText {
+      @extend .text-center;
+      @include font-style(small, regular);
+      color: var(--color4);
+      padding-bottom: 13px;
+    }
+  }
+
+  .invalidEmailInput {
+    @include shake;
+  }
+}
+
+/* ============================================================
+                    Change Location Modal
+=============================================================== */
+
+.changelocationPopup {
+  .mat-mdc-dialog-content {
+    min-height: calc(80vh - 180px);
+  }
+
+  .dialog-header {
+    margin-bottom: 10px;
+
+    & .underscore {
+      color: var(--color22);
+    }
+
+    & .title-text {
+      color: var(--color22);
+      @include font-style(regular, regular);
+      text-transform: uppercase;
+      margin-left: 10px;
+      margin-right: 14px;
+    }
+
+    & .title-text .titleHead {
+      margin-left: 10px;
+    }
+  }
+
+  .headerElements {
+    @include flex;
+    @extend .justify-between;
+  }
+
+  .icon-header {
+    @include flex;
+
+    & .mat-icon {
+      width: 25px;
+      height: 25px;
+      border: 1px solid var(--color12);
+      color: var(--color27);
+      opacity: 0.4;
+      cursor: pointer;
+      margin-right: 15px;
+      @include border-radius(8px);
+    }
+  }
+
+  .customView {
+    margin: 20px 5px;
+  }
+}
+
+/* ============================================================
+                    Register Device Modal
+=============================================================== */
+
+.registerDevicePopup {
+  & .mat-mdc-dialog-title {
+    background-color: var(--color5);
+    margin-bottom: 0px;
+    padding: 5px 20px;
+
+    & .title-text {
+      @include font-style(regular, regular);
+      color: var(--color22);
+      margin-left: 10px;
+    }
+
+    & .title-text .titleHead {
+      margin-left: 10px;
+    }
+  }
+
+  form {
+    & .mat-mdc-dialog-content {
+      @include fullwidth;
+      padding: 24px 24px 0px;
+
+      .mat-mdc-form-field {
+        @include fullwidth;
+        margin-top: 10px;
+      }
+    }
+
+    .icon-text-details {
+      @extend .d-flex;
+      margin: 10px 0px 10px 20px;
+
+      & .mat-icon {
+        font-size: 20px;
+        margin-right: 5px;
+        color: var(--color25);
+      }
+
+      .icon-text-intervals {
+        @include font-style(regular, regular);
+        color: var(--color12);
+      }
+    }
+
+    .mat-mdc-dialog-actions {
+    }
+  }
+}
+
+/* ============================================================
+                 Devices , Menu Items List Pages
+=============================================================== */
+
+app-devices-list , app-menu-list-common {
+  .scrollTable {
+    max-height: calc(100vh - 250px);
+    @extend .overflow-auto;
+
+    table {
+      @include tableProperties;
+      @include tableRowHover;
+    }
+  }
+
+  .actionsWrap {
+    @include customAddFabBtn;
+  }
+}
+
+/* ============================================================
+                 Profile Side Bar
+=============================================================== */
+
+.profileBar {
+  body.profile-open {
+    @extend .overflow-hidden;
+  }
+
+  .profilecanvas {
+    @extend .position-fixed;
+    @extend .top-0;
+    right: -440px;
+    width: 400px;
+    @include fullheight;
+    background-color: var(--color1);
+    color: var(--color2);
+    z-index: 1000;
+    transition: right 0.3s ease-in-out;
+    -webkit-transition: right 0.3s ease-in-out;
+    -moz-transition: right 0.3s ease-in-out;
+    -ms-transition: right 0.3s ease-in-out;
+    -o-transition: right 0.3s ease-in-out;
+  }
+
+  .profilecanvas.open {
+    right: 0 !important;
+
+    + {
+      .sidebar_backdrop {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  }
+
+  .responsiveProfileWraper {
+    .contentWraper {
+      min-width: 340px;
+
+      .topPart {
+        padding: 30px 20px;
+        background-color: var(--color5);
+        min-height: 230px;
+        @include customFont;
+        @include fullwidth;
+
+        .draWerClose {
+          font-size: map-get($font-sizes, large);
+          @extend .float-right;
+          color: var(--color7);
+          cursor: pointer;
+        }
+
+        .profileImageWrap {
+          h1 {
+            @include profileCOntainer;
+            margin-bottom: 12px;
+          }
+        }
+
+        .details {
+          :nth-child(1) {
+            font-size: map-get($font-sizes, x-large) - 2;
+            font-weight: map-get($font-weights, medium);
+            color: var(--color7);
+          }
+
+          :nth-child(2),
+          :nth-child(3) {
+            @include flex;
+            align-items: flex-start;
+            @extend .align-start;
+            column-gap: 5px;
+            color: var(--color7);
+            @include font-style(regular, regular);
+            @include zeromargin;
+            margin-bottom: 0px;
+
+            .mat-icon {
+              font-size: map-get($font-sizes, large);
+              font-weight: map-get($font-weights, medium);
+            }
+          }
+        }
+      }
+
+      .bottomPart {
+        padding: 20px 0px;
+        max-height: calc(100vh - 285px);
+        @extend .overflow-auto;
+        .menuItem {
+          padding: 15px 20px;
+          @include fullwidth;
+
+          &.current {
+            cursor: pointer;
+            background-color: var(--color15);
+          }
+
+          &:hover {
+            cursor: pointer;
+            background-color: var(--color15);
+          }
+
+          a {
+            @include flex;
+            column-gap: 15px;
+            @include zeromargin;
+            text-decoration: none;
+            :nth-child(1) {
+              .mat-icon {
+                font-size: map-get($font-sizes, x-large) + 2;
+                color: var(--color4);
+              }
+            }
+
+            :nth-child(2) {
+              @include font-style(medium, medium);
+              color: var(--color7);
+            }
+
+            span {
+              .linkIcon {
+                @include transform(rotate(-45deg));
+              }
+            }
+          }
+        }
+      }
+
+      .footer {
+        @extend .position-absolute;
+        @extend .bottom-0;
+        padding: 10px;
+        box-shadow: var(--popupFooterShadow);
+        @include fullwidth;
+        background-color: var(--color1);
+
+        &:hover {
+          cursor: pointer;
+          background-color: var(--color5);
+        }
+
+        p {
+          @include fullwidth;
+          @include flexwithcenter;
+          column-gap: 15px;
+          @include zeromargin;
+
+          .mat-icon {
+            font-size: map-get($font-sizes, x-large) + 2;
+            color: var(--color4);
+          }
+
+          span {
+            @include font-style(medium, medium);
+            color: var(--color7);
+          }
+        }
+      }
+    }
+  }
+}
+.sidebar_backdrop {
+  @extend .position-fixed;
+  @extend .top-0;
+  @extend .bottom-0;
+  @extend .left-0;
+  @extend .right-0;
+  background-color: var(--overlay);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+  transition: opacity 0.3s ease-in-out;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+}
+
+/* ============================================================
+                 Devices View Page
+=============================================================== */
+app-devices-view-dialog {
+  .dialog-header {
+    @extend .position-relative;
+    margin-bottom: 10px;
+    & .title-text {
+      @extend .position-absolute;
+      @include font-style(regular, regular);
+      color: var(--color22);
+      margin-left: 10px;
+    }
+    & .title-text .titleHead {
+      margin-left: 10px;
+    }
+  }
+  .headerElements {
+    @extend .d-flex;
+    @extend .justify-between;
+
+    .deactive {
+      border: 1px solid var(--warn);
+      font-size: map-get($font-sizes, small) + 1;
+      color: var(--warn) !important;
+      margin-right: 15px;
+      padding: 3px 11px;
+      width: 120px;
+      height: 28px;
+    }
+
+    .active {
+      border: 1px solid var(--primary-color);
+      font-size: map-get($font-sizes, small) + 1;
+      color: var(--primary-color) !important;
+      margin-right: 15px;
+      padding: 3px 11px;
+      width: 153px;
+      height: 28px;
+    }
+  }
+  .icon-header {
+    @include flex;
+    & .mat-icon {
+      width: 25px;
+      height: 25px;
+      border: 1px solid var(--color12);
+      color: var(--color27);
+      opacity: 0.4;
+      cursor: pointer;
+      margin-right: 15px;
+      @include border-radius(8px);
+    }
+  }
+  .cancelTermBtn {
+    color: var(--warn) !important;
+    font-size: map-get($font-sizes, small) + 1;
+    font-weight: map-get($font-weights, regular);
+    border: 1px solid var(--warn) !important;
+    height: 24px;
+    padding: 2px 10px;
+    outline: none;
+    background-color: var(--color1);
+    cursor: pointer;
+    @include border-radius(6px);
+  }
+  .termHeader {
+    @extend .d-flex;
+    @extend .justify-between;
+  }
+  .scrollTable {
+    max-height: calc(100vh - 250px);
+    overflow: auto;
+  }
+  .mat-mdc-tab-header {
+    border-bottom: 1px solid var(--color14);
+  }
+  .customView {
+    margin: 20px 5px;
+    .actionsWrap {
+      padding: 0 0 20px 0;
+      @include flex;
+      @extend .justify-end;
+      gap: 30px;
+    }
+
+    app-menu-list-common {
+      .scrollTable {
+        max-height: calc(100vh - 250px);
+        overflow: auto;
+        table {
+          @include tableProperties;
+        }
+      }
+    }
+  }
+
+  .add-button-adjust {
+    text-align: right;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    & .mat-icon {
+      color: var(--color1);
+    }
+  }
+}
+
+/* ============================================================
+                 Devices View Page
+=============================================================== */
+app-scheduled-menu-list {
+  .scrollTable {
+    max-height: calc(100vh - 300px);
+    @extend .overflow-auto;
+
+    table {
+      @include tableProperties;
+      @include tableRowHover;
+    }
+  }
+
+  .actionsWrap {
+    @include customAddFabBtn;
+  }
+
+}
+
+/* ============================================================
+                 Schedule details view
+=============================================================== */
+app-schedule-menu-view-dialog {
+  .dialog-header {
+    @extend .position-relative;
+    margin-bottom: 10px;
+    & .title-text {
+      @extend .position-absolute;
+      @include font-style(regular, regular);
+      color: var(--color22);
+      margin-left: 10px;
+    }
+    & .title-text .titleHead {
+      margin-left: 10px;
+    }
+  }
+  .headerElements {
+    @extend .d-flex;
+    @extend .justify-between;
+
+    .deactive {
+      border: 1px solid var(--warn);
+      font-size: map-get($font-sizes, small) + 1;
+      color: var(--warn) !important;
+      margin-right: 15px;
+      padding: 3px 11px;
+      width: 120px;
+      height: 28px;
+    }
+
+    .active {
+      border: 1px solid var(--primary-color);
+      font-size: map-get($font-sizes, small) + 1;
+      color: var(--primary-color) !important;
+      margin-right: 15px;
+      padding: 3px 11px;
+      width: 153px;
+      height: 28px;
+    }
+  }
+  .icon-header {
+    @include flex;
+    & .mat-icon {
+      width: 25px;
+      height: 25px;
+      border: 1px solid var(--color12);
+      color: var(--color27);
+      opacity: 0.4;
+      cursor: pointer;
+      margin-right: 15px;
+      @include border-radius(8px);
+    }
+  }
+  .cancelTermBtn {
+    color: var(--warn) !important;
+    font-size: map-get($font-sizes, small) + 1;
+    font-weight: map-get($font-weights, regular);
+    border: 1px solid var(--warn) !important;
+    height: 24px;
+    padding: 2px 10px;
+    outline: none;
+    background-color: var(--color1);
+    cursor: pointer;
+    @include border-radius(6px);
+  }
+  .termHeader {
+    @extend .d-flex;
+    @extend .justify-between;
+  }
+  .scrollTable {
+    max-height: calc(100vh - 250px);
+    overflow: auto;
+  }
+  .mat-mdc-tab-header {
+    border-bottom: 1px solid var(--color14);
+  }
+  .customView {
+    margin: 20px 5px;
+    .actionsWrap {
+      padding: 0 0 20px 0;
+      @include flex;
+      @extend .justify-end;
+      gap: 30px;
+    }
+
+    app-menu-list-common {
+      .scrollTable {
+        max-height: calc(100vh - 250px);
+        overflow: auto;
+        table {
+          @include tableProperties;
+        }
+      }
+    }
+  }
+
+  .add-button-adjust {
+    text-align: right;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    & .mat-icon {
+      color: var(--color1);
+    }
+  }
+}
+
+/* ============================================================
+                 Create Schedule Menu Stepper
+=============================================================== */
+
+.createMenuPopup {
+  .mat-mdc-dialog-content{
+.mat-horizontal-content-container{
+  @include zeropadding;
+  .stpebody{
+    .menunameSection{ margin-bottom:20px; border-bottom:1px solid var(--color14); padding-bottom:20px;}
+    .selectedDatesChipsWrap{
+      margin-top:10px;
+      border:1px solid var(--color14);
+      padding:20px;
+      @include border-radius(8px);
+    }
+    .sectionHeader{@include font-style(medium,medium); color:var(--color12);}
+    app-menu-list-common{
+      .scrollTable{
+        max-height: calc(100vh - 300px);
+        table{
+          .mat-mdc-row:hover .mat-mdc-cell {
+            background-color: var(--color1);
+            cursor: default;
+          }
+        }
+      }
+    }
+  }
+}}
+}
+
+
+/* ============================================================
+                 assign item pop up
+=============================================================== */
+.assignItemPop {
+  .mat-mdc-dialog-content {
+      @include zeropadding;
+      .stpebody {
+        padding-top:16px;
+        h5.sectionHeader {
+          @include font-style(medium,medium);
+          color: var(--color37);
+          margin-bottom: 10px;
+        }
+        .searchwrapper {
+          @include fullwidth;
+          margin-bottom: 24px;
+          input.mat-mdc-input-element {
+            padding: 16px 30px 16px 13px;
+            @include font-style(medium,regular);
+            @include customFont;
+            border: 1px solid var(--color23);
+            transition: border-color 0.3s ease;
+            @include border-radius(4px);
+            @include fullwidth;
+            min-width: 0;
+
+            &:focus {
+              outline: none;
+              border-color: var(--primary-color);
+              border-width: 2px;
+
+              + .mat-icon {
+                color: var(--primary-color);
+              }
+            }
+
+            &::placeholder {
+              font-size: nth($font-sizes, 1);
+              font-weight: nth($font-weights, 3);
+              @include font-style(regular,regular);
+              @include customFont;
+              color: var(--color4);
+            }
+          }
+          .mat-icon {
+            top: 16px;
+            color: var(--color4);
+          }
+        }
+        .searchResultsWrap {
+          :is(h5, p) {
+            @include zeromargin;
+          }
+          // p.resultsInfo {
+          //   font-size: nth($font-sizes, 1) - 1;
+          //   font-weight: nth($font-weights, 3);
+          //   color: var(--color12);
+          //   margin-bottom: 24px;
+          // }
+          // .scrollTable {
+          //   max-height: calc(100vh - 460px);
+          //   overflow: auto;
+          //   table {
+          //     @include tableProperties;
+          //     .disabled {
+          //       opacity: 0.5;
+          //       pointer-events: none;
+          //     }
+          //   }
+          // }
+        }
+        .infoWrap {
+          padding: 9px 12px;
+          @include border-radius(2px);
+          border: 1px solid var(--color40);
+          background-color: var(--color41);
+          @include zeromargin;
+          .infoText {
+            font-size: map-get($font-sizes,small) + 1;
+            font-weight: map-get($font-weights,regular);
+            color: var(--color12);
+            @include zeromargin;
+          }
+        }
+      }
+  }
+}
+
+/* ============================================================
+                Custom Search Wrap.
+=============================================================== */
+
+.searchwrapper {
+  position: relative;
+  width: auto;
+  margin-top: 0px;
+  float: left;
+
+  & input {
+    padding: 10px 30px 8px 10px;
+    box-sizing: border-box;
+    background: var(--color1);
+    border: 1px solid var(--color14);
+    border-radius: 10px;
+    min-width: 300px;
+    min-height: 40px;
+    font-size: 16px;
+    @include customFont;
+  }
+
+  & .mat-icon {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+  }
+
+  & .mat-form-field-infix {
+    padding-top: 0;
+    border: 0;
+    padding: 0;
+  }
+
+  & .mat-form-field-wrapper {
+    padding-bottom: 0;
+    border-radius: 8px;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-flex {
+    margin-top: 0;
+  }
+}
+
+/* ============================================================
+                 custom inventry stock popup
+=============================================================== */
+.customInventoryStockPopup {
+  .icon-text-details {
+    @include flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: map-get($font-sizes, small) + 1;
+    color: var(--color36);
+
+    .mat-icon {
+      font-size:  map-get($font-sizes, regular) + 2;
+      width: 16px;
+      height: 16px;
+      padding-right: 10px;
+      margin-top: 4px;
+    }
+  }
+  .mat-mdc-dialog-content {
+    position: relative;
+    .info-Sticker {
+      background-color: var(--yellowBackground);
+      padding: 10px 24px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include fullwidth;
+      p {
+        color: var(--saffranText);
+        margin: 0;
+        font-size:  map-get($font-sizes, small);
+      }
+    }
+    .contentWrap {
+      padding-top: 40px;
+      .formFieldsWidth {
+        @extend .w-full;
+      }
+    }
+  }
+}
+
+/* ============================================================
+                 Menu details view
+=============================================================== */
+
+app-menu-detail-view-dialog {
+  .dialog-header {
+    @extend .position-relative;
+    margin-bottom: 10px;
+    & .title-text {
+      @extend .position-absolute;
+      @include font-style(regular, regular);
+      color: var(--color22);
+      margin-left: 10px;
+    }
+    & .title-text .titleHead {
+      margin-left: 10px;
+    }
+  }
+  .headerElements {
+    @extend .d-flex;
+    @extend .justify-between;
+
+    .deactive {
+      border: 1px solid var(--warn);
+      font-size: map-get($font-sizes, small) + 1;
+      color: var(--warn) !important;
+      margin-right: 15px;
+      padding: 3px 11px;
+      width: 120px;
+      height: 28px;
+    }
+
+    .active {
+      border: 1px solid var(--primary-color);
+      font-size: map-get($font-sizes, small) + 1;
+      color: var(--primary-color) !important;
+      margin-right: 15px;
+      padding: 3px 11px;
+      width: 153px;
+      height: 28px;
+    }
+  }
+  .icon-header {
+    @include flex;
+    & .mat-icon {
+      width: 25px;
+      height: 25px;
+      border: 1px solid var(--color12);
+      color: var(--color27);
+      opacity: 0.4;
+      cursor: pointer;
+      margin-right: 15px;
+      @include border-radius(8px);
+    }
+  }
+  .cancelTermBtn {
+    color: var(--warn) !important;
+    font-size: map-get($font-sizes, small) + 1;
+    font-weight: map-get($font-weights, regular);
+    border: 1px solid var(--warn) !important;
+    height: 24px;
+    padding: 2px 10px;
+    outline: none;
+    background-color: var(--color1);
+    cursor: pointer;
+    @include border-radius(6px);
+  }
+  .termHeader {
+    @extend .d-flex;
+    @extend .justify-between;
+  }
+  .scrollTable {
+    max-height: calc(100vh - 250px);
+    overflow: auto;
+  }
+  .mat-mdc-tab-header {
+    border-bottom: 1px solid var(--color14);
+  }
+  .customView {
+    margin: 20px 5px;
+    .actionsWrap {
+      padding: 0 0 20px 0;
+      @include flex;
+      @extend .justify-end;
+      gap: 30px;
+    }
+
+    app-menu-list-common {
+      .scrollTable {
+        max-height: calc(100vh - 250px);
+        overflow: auto;
+        table {
+          @include tableProperties;
+        }
+      }
+    }
+  }
+
+  .add-button-adjust {
+    text-align: right;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    & .mat-icon {
+      color: var(--color1);
+    }
+  }
+}

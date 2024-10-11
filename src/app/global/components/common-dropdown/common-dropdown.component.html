@@ -1,0 +1,64 @@
+<!-- [class.active]="filterForm.controls[control.Name].value && filterForm.controls[control.Name].value.length > 0" -->
+<mat-form-field
+  class="filterselect"
+  [class.active]="hasValue() && !dropdownInput.Disabled"
+  [class.disabled]="dropdownInput.Disabled"
+>
+  <label>{{
+    translateEntityMap[entity] +
+      '.' +
+      (dropdownInput.TranslateKey
+        ? dropdownInput.TranslateKey
+        : dropdownInput.Name) | translate
+  }}</label>
+
+  <mat-select
+    [disabled]="dropdownInput.Disabled"
+    panelClass="selectpanel"
+    (selectionChange)="emitValue($event)"
+    [multiple]="hasMultiSelection()"
+    [formControl]="selectCtrl"
+    disableOptionCentering
+  >
+    <mat-select-trigger>
+      {{
+        selectCtrl.value ||
+        (hasMultiSelection() && selectCtrl.value?.length > 0)
+          ? getFirstSelectedText
+          : ''
+      }}
+      <span *ngIf="selectCtrl.value?.length > 1" class="">
+        (+{{ selectCtrl.value.length - 1 }} More)
+      </span>
+    </mat-select-trigger>
+
+    <mat-select-search
+      #selectSearch
+      *ngIf="hasSearchControl()"
+      [formControl]="searchCtrl"
+      [placeholderLabel]="placeholderLabel"
+      [noEntriesFoundLabel]="noEntriesFoundLabel"
+    ></mat-select-search>
+    <span
+      class="searchclear"
+      *ngIf="hasSearchControl() && hasMultiSelection() && hasValue()"
+      ><span>{{ selectedLength }} Selected</span>
+      <a href="javascript:;" (click)="clearSelection()">{{
+        clearSelectedItemsLabel
+      }}</a></span
+    >
+    <mat-option
+      *ngFor="let item of filteredData | async"
+      [value]="item[dropdownInput.DropDownInput.Key]"
+    >
+      {{ item[dropdownInput.DropDownInput.Text] }}
+    </mat-option>
+  </mat-select>
+  <!-- <mat-select panelClass="selectpanel" *ngIf="!hasMultiSelection()" disableOptionCentering>
+        <mat-select-search *ngIf="hasSearchControl()" [formControl]="searchCtrl" [placeholderLabel]="placeholderLabel"
+            [noEntriesFoundLabel]="noEntriesFoundLabel"></mat-select-search>
+        <mat-option *ngFor="let item of filteredData | async" [value]="item[dropdownInput.DropDownInput.Key]">
+            {{ item[dropdownInput.DropDownInput.Text] }}
+        </mat-option>
+    </mat-select> -->
+</mat-form-field>

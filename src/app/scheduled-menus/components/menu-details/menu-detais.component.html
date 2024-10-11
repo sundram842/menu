@@ -1,0 +1,56 @@
+<div *ngIf="loader" class="pageLoader">
+  <div class="custom-loader"></div>
+</div>
+<div class="termDetailsContainer">
+    <div class="termDetailsWrapper">
+      <p class="basicDetails">
+        <!-- {{ 'DEVICES.BASIC_DETAILS' | translate }} -->
+          Basic details
+      </p>
+      <div class="termSummaryDetails">
+        <p class="titleText">
+          <!-- {{ 'DEVICES.NAME' | translate }} -->
+            Name
+        </p>
+        <p class="titleContent">{{(scheduleDetails?.name | titlecase) ?? '-'}}</p>
+      </div>
+      <div class="termSummaryDetails">
+        <p class="titleText">
+          <!-- {{ 'DEVICES.BRAND' | translate }} -->
+           Schedule Date
+        </p>
+        <p class="titleContent">
+            {{(scheduleDetails?.date | date: 'MMM dd, yyyy') ?? '-'}}</p>
+      </div>
+      <div class="termSummaryDetails">
+        <p class="titleText">
+          <!-- {{ 'DEVICES.BRAND' | translate }} -->
+            Created At
+        </p>
+        <p class="titleContent">
+            {{(scheduleDetails?.createdAt | date: 'MMM dd, yyyy') ?? '-'}}</p>
+      </div>
+    </div>
+    <div>
+      <button class="add-btn-details" (click)="openUpdateDialog()">
+        <span>
+          <!-- {{"DEVICES.EDIT"| translate}} -->
+           Edit
+        </span>
+      </button>
+    </div>
+  </div>
+  <div class="termDetailsContainer">
+
+    <div class="termDetailsWrapper">
+      <p class="scheduleText">Status</p>
+      <div class="termSummaryDetails">
+        <!-- <p class="titleContent">{{ 'CLASSES.TOGGLE_TURN_ON' | translate}}</p> -->
+        <!-- <p class="titleContent">{{ batchDetailData.location ? batchDetailData.location : '' }}</p> -->
+      </div>
+  
+    </div>
+    <div>
+      <mat-slide-toggle color="primary" *ngIf="scheduleDetails" [checked]="scheduleDetails?.status === 'active'" (change)="toogleAction($event)"></mat-slide-toggle>
+    </div>
+  </div>

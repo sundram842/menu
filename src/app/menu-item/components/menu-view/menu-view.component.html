@@ -1,0 +1,80 @@
+
+<div *ngIf="loader" class="pageLoader">
+    <div class="custom-loader"></div>
+  </div>
+  <div class="termDetailsContainer">
+      <div class="termDetailsWrapper">
+        <p class="basicDetails">
+          {{ 'DEVICES.BASIC_DETAILS' | translate }}
+        </p>
+        <div class="termSummaryDetails">
+          <p class="titleText">
+            {{ 'MENU.SKU' | translate }}
+          </p>
+          <p class="titleContent">
+            {{(menuDetails?.sku | titlecase) ?? '-'}}
+            </p>
+        </div>
+        <div class="termSummaryDetails">
+          <p class="titleText">
+            {{ 'MENU.NAME' | translate }}
+          </p>
+          <p class="titleContent">{{(menuDetails?.name | titlecase) ?? '-'}}</p>
+        </div>
+        <div class="termSummaryDetails">
+          <p class="titleText">
+            {{ 'MENU.DISPLAY_NAME' | translate }}
+          </p>
+          <p class="titleContent">
+            {{(menuDetails?.displayName | titlecase) ?? '-'}}
+             </p>
+        </div>
+        <div class="termSummaryDetails">
+          <p class="titleText">
+            {{ 'MENU.DESCRIPTION' | translate }}
+          </p>
+          <p class="titleContent">
+            {{(menuDetails?.description| titlecase) ?? '-'}}
+            </p>
+        </div>
+        <div class="termSummaryDetails">
+          <p class="titleText">
+            {{ 'MENU.PRIMARY_INGREDIENT' | translate }}
+          </p>
+          <p class="titleContent">
+            {{(menuDetails?.primaryIngredientInfo?.title | titlecase) ?? '-'}}
+            </p>
+        </div>
+        <div class="termSummaryDetails">
+          <p class="titleText">
+            {{ 'MENU.CATEGORIES' | translate }}
+          </p>
+          <p class="titleContent">
+            {{(menuDetails?.primaryCategoryInfo?.name | titlecase) ?? '-'}}
+            </p>
+        </div>
+        <div class="termSummaryDetails">
+          <p class="titleText">
+            {{ 'MENU.SUB_CATEGORIES' | translate }}
+          </p>
+          <p class="titleContent">
+            {{(menuDetails?.secondaryCategoryInfo?.name| titlecase) ?? '-'}}
+            </p>
+        </div>
+        <div class="termSummaryDetails">
+          <p class="titleText">
+            {{ 'DEVICES.STATUS' | translate }}
+          </p>
+          <p class="titleContent">
+            {{(menuDetails?.status | titlecase) ?? '-'}}
+            </p>
+        </div>
+      </div>
+      <div>
+        <button class="add-btn-details" (click)="updateMenuItem()">
+          <span>
+            {{"DEVICES.EDIT"| translate}}
+          </span>
+        </button>
+      </div>
+    </div>

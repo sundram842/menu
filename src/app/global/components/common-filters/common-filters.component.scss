@@ -1,0 +1,210 @@
+$color: var(--custom-primary-color);
+
+.fliteroverlay {
+  position: relative;
+  z-index: 9;
+  margin-bottom: 0px;
+  float: left;
+  width: 100%;
+  padding: 0px 0px 0px 24px;
+}
+
+.fliteroverlayInner {
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // background: #fff;
+  // border-radius: 4px;
+  // box-shadow: 1px 0px 4px 1px #ecebeb;
+  // padding: 10px 10px 0;
+}
+
+.filterlist {
+  float: left;
+  width: 100%;
+}
+
+.filtermore {
+  position: absolute;
+  right: 0px;
+  bottom: -4px;
+}
+
+// .filtermorelist{ position: absolute; top:100px;}
+.filter_title {
+  position: absolute;
+  top: -10px;
+
+  & span {
+    background: #fff;
+    padding: 0 5px;
+  }
+}
+
+.fliterform {
+  display: flex;
+  width: 100%;
+  padding-right: 20px;
+}
+
+.flitersubmit {
+  margin-left: 10px;
+}
+
+.rowlist {
+  & li {
+    float: left;
+    margin: 0 10px 10px 0;
+  }
+}
+
+.filterlist {
+  // max-height: 60px;
+  overflow-y: hidden;
+  transition: ease-in-out 400ms max-height;
+  float: left;
+
+  width: 100%;
+
+  & ul {
+    padding: 0 10px 0px 0px;
+  }
+}
+
+//  .filterlist.opened {
+//   max-height: 1000px;
+//   transition: ease-in-out 600ms max-height;
+// }
+.filtertxtclose {
+  padding: 0;
+  top: 6px;
+  position: absolute;
+  right: 3px;
+  color: #fff;
+
+  & .mat-icon {
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
+  }
+}
+
+.fliterform {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+  }
+}
+
+// .filterselect .mat-select[aria-activedescendant]{ width: 10px !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.flitercontainer {
+  background: #f5f6f8;
+  color: #4e6583;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 3px;
+  display: flex;
+  position: relative;
+
+  .txt_content {
+    position: relative;
+    padding-right: 10px;
+
+    & div,
+    & input {
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 19px;
+    }
+
+    & div {
+      visibility: hidden;
+    }
+
+    & input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      font-size: 14px;
+    }
+  }
+
+  &.active {
+    background: $color;
+    border-color: #7d889b;
+
+    & label {
+      font-family: 'robotomedium', sans-serif;
+      color: #fff;
+      font-size: 14px;
+      line-height: 19px;
+      margin-right: 5px;
+    }
+
+    & .txt_content {
+      & * {
+        color: #fff;
+        font-size: 14px;
+      }
+    }
+  }
+
+  &.disabled {
+    opacity: 0.4;
+  }
+}
+
+.clearfilter {
+  color: #a79595;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 10px;
+  margin-top: 11px;
+  position: relative;
+  padding-left: 15px;
+  display: inline-block;
+
+  & a,
+  span {
+    color: #a79595;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    border-left: 1px solid #ccc;
+    left: 2px;
+  }
+}
+
+.clearblock {
+  white-space: nowrap;
+}
+
+.clear {
+  margin-right: 20px;
+}
+
+.filter-check .mat-checkbox {
+  color: #aaa;
+  font-size: 14px;
+  position: relative;
+  top: -2px;
+}

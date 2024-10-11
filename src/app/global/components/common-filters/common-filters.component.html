@@ -1,0 +1,179 @@
+<div class="fliteroverlay" *ngIf="formPrepared && hasFilterControls">
+  <div class="fliteroverlayInner">
+    <div class="filterlist" [class.opened]="show">
+      <form
+        #content
+        [formGroup]="filterForm"
+        class="fliterform"
+        (ngSubmit)="onSubmit(filterForm.value)"
+      >
+        <ul class="rowlist">
+          <ng-container *ngFor="let control of filterControls; let i = index">
+            <li
+              *ngIf="
+                formAttributes.length > 0 && control.Name
+                  | findIndex : formAttributes
+              "
+            >
+              <!-- TextBox Control -->
+              <div
+                [class.active]="filterForm.controls[control.Name].value"
+                class="flitercontainer"
+                *ngIf="
+                  isTextBoxControl(control) &&
+                    formAttributes.length > 0 &&
+                    control.Name | findIndex : formAttributes
+                "
+              >
+                <label *ngIf="filterForm.controls[control.Name].value"
+                  >{{
+                    translateEntityMap[entity] +
+                      '.' +
+                      (control.TranslateKey
+                        ? control.TranslateKey
+                        : control.Name) | translate
+                  }}:
+                </label>
+                <div class="txt_content">
+                  <div>
+                    {{
+                      filterForm.controls[control.Name].value
+                        ? filterForm.controls[control.Name].value
+                        : (translateEntityMap[entity] + '.' + control.Name
+                          | translate)
+                    }}
+                  </div>
+                  <input
+                    matInput
+                    placeholder="{{
+                      translateEntityMap[entity] + '.' + control.Name
+                        | translate
+                    }}"
+                    [formControlName]="control.Name"
+                  />
+                </div>
+                <a
+                  href="javascript:;"
+                  class="filtertxtclose"
+                  *ngIf="filterForm.controls[control.Name].value"
+                  (click)="filterForm.controls[control.Name].setValue('')"
+                >
+                  <mat-icon>close</mat-icon>
+                </a>
+              </div>
+              <!-- TextBox Control -->
+
+              <!-- CheckBox Control -->
+              <div
+                [class.active]="
+                  filterForm.controls[control.Name].value && !control.Disabled
+                "
+                class="flitercontainer filter-check"
+                [class.disabled]="control.Disabled"
+                *ngIf="
+                  isCheckBoxControl(control) &&
+                    formAttributes.length > 0 &&
+                    control.Name | findIndex : formAttributes
+                "
+              >
+                <!-- <label *ngIf="filterForm.controls[control.Name].value"
+                  >{{
+                    translateEntityMap[entity] + '.' + control.Name | translate
+                  }}:
+                </label> -->
+                <div class="txt_content">
+                  <!-- <div>
+                    {{
+                      filterForm.controls[control.Name].value
+                        ? filterForm.controls[control.Name].value
+                        : (translateEntityMap[entity] + '.' + control.Name
+                          | translate)
+                    }}
+                  </div>
+                  <input
+                    matInput
+                    placeholder="{{
+                      translateEntityMap[entity] + '.' + control.Name
+                        | translate
+                    }}"
+                    [formControlName]="control.Name"
+                  /> -->
+                  <mat-checkbox
+                    color="primary"
+                    [formControlName]="control.Name"
+                    [disabled]="control.Disabled"
+                  >
+                    {{
+                      translateEntityMap[entity] + '.' + control.Name
+                        | translate
+                    }}
+                  </mat-checkbox>
+                </div>
+                <!-- <a
+                  href="javascript:;"
+                  class="filtertxtclose"
+                  *ngIf="filterForm.controls[control.Name].value"
+                  (click)="filterForm.controls[control.Name].setValue('')"
+                >
+                  <mat-icon>close</mat-icon>
+                </a> -->
+              </div>
+              <!-- CheckBox Control -->
+
+              <!-- DropDown Control -->
+              <div
+                *ngIf="
+                  isDropDownControl(control) &&
+                    isValidDropDown(control) &&
+                    formAttributes.length > 0 &&
+                    control.Name | findIndex : formAttributes
+                "
+              >
+                <app-common-dropdown
+                  [dropdownInput]="control"
+                  [entity]="entity"
+                  [defaultValue]="filterForm.controls[control.Name]?.value"
+                  (finalSelection)="setSelectedValue($event, control)"
+                ></app-common-dropdown>
+              </div>
+              <!-- DropDown Control -->
+
+              <!-- TimeInterval Control -->
+              <div
+                *ngIf="
+                  isTimeIntervalControl(control) &&
+                    formAttributes.length > 0 &&
+                    control.Name | findIndex : formAttributes
+                "
+              >
+                <app-common-datetime
+                  [entity]="entity"
+                  [controlInput]="control"
+                  (finalSelection)="setSelectedValue($event, control)"
+                ></app-common-datetime>
+              </div>
+              <!-- TimeInterval Control -->
+            </li>
+          </ng-container>
+        </ul>
+        <div class="clearblock" [ngClass]="{ clear: hasMoreIcon }">
+          <span class="clearfilter" *ngIf="!allFiltersEmpty">
+            <span (click)="clearFilters()">Clear Filters</span></span
+          >
+          <span class="clearfilter ml10">
+            <span (click)="onSubmit(filterForm.value)">{{
+              'GLOBAL.submit' | translate
+            }}</span></span
+          >
+          <!-- <button mat-stroked-button class="flitersubmit" color="primary">{{ 'GLOBAL.submit' | translate }}</button> -->
+        </div>
+      </form>
+    </div>
+
+    <!-- 
+      <a *ngIf="moreicon" href="javascript:;" class="filtermore" (click)="show = !show" [attr.title]="show ? 'Less' : 'More'">
+        <mat-icon *ngIf="!show">keyboard_arrow_down</mat-icon>
+        <mat-icon *ngIf="show">keyboard_arrow_up</mat-icon>
+      </a> -->
+  </div>
+</div>

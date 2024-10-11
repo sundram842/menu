@@ -1,0 +1,112 @@
+{
+  "GLOBAL": {
+    "LOGIN": "Login",
+    "USER_NAME": "Username",
+    "PASSWORD": "Password",
+    "FORGOT_PASSWORD": "Forgot password",
+    "SUBMIT": "Submit",
+    "CLEAR": "Clear",
+    "OK": "Ok",
+    "ERROR": "Oops! something went wrong....!!"
+  },
+  "DEVICES": {
+    "NAME": "Name",
+    "BRAND": "Brand",
+    "MODEL": "Model",
+    "CREATED_AT": "Created at",
+    "STATUS": "Status",
+    "BUSINESS_CENTER_LOCATION": "Business center location",
+    "DEVICE_CREATED": "Device created successfully",
+    "DEVICE_UPDATED": "Device updated successfully",
+    "DISPLAY_NAME": "Display name",
+    "EDIT": "Edit",
+    "BASIC_DETAILS": "Basic details",
+    "DISABLE_DEVICE": "Deactivate",
+    "ACTIVE_DEVICE": "Activate",
+    "POS_CLIENTS": "Pos clients",
+    "CLIENT": "Client",
+    "TYPE": "Type",
+    "SERIAL_NUMBER": "Serial number",
+    "FIRMWARE_VERSION": "Fireware version",
+    "CONNECTION_TYPE": "Connection type",
+    "IP_ADDRESS": "Ip address",
+    "MAC_ADDRESS": "Mac address",
+    "OS_COMPATIBILITY": "Os compatibility",
+    "REGISTER_DEVICE": "Register device",
+    "REGISTER": "Register",
+    "UPDATE": "Update",
+    "ASSIGN_ITEM": "Assign item(s)",
+    "UNASSIGN_ITEM": "Unassign item(s)",
+    "DEVICE_UNASSIGNE": "Device(s) unassigned successfully",
+    "DEVICE_DEACTIVATED": "Device deactived successfully",
+    "DEVICE_ACTIVATED": "Device actived successfully",
+    "SELECT_POS_CLIENTS": "Select pos client",
+    "SELECT_TYPE": "Select device type",
+    "SELECT_ASSIGN_ITEMS": "Select a Business Center to switch",
+    "NODATAMATCHING": "No Items found"
+  },
+  "MENU": {
+    "NAME": "Name",
+    "DISPLAY_NAME": "Display name",
+    "SKU_ID": "SKU ID",
+    "PRIMARY_INGREDIENT": "Primary Ingredient",
+    "STATUS": "Status",
+    "ERROR": "Oops! Something went wrong",
+    "OK": "OK",
+    "NEW_ITEM": "Create New Item",
+    "CODE": "Code",
+    "SKU": "SKU",
+    "DESCRIPTION": "Description",
+    "BASE_PRICE": "Base price",
+    "SELLING_PRICE": "Selling price",
+    "SUB_CATEGORY": "Sub category",
+    "MODIFIER": "Canbemodifier",
+    "MEASUREMENT": "Unit of measurement",
+    "SUBMIT" :"Submit",
+    "UPDATE" : "Update",
+    "UPDATE_ITEMS": "Items updated successfully",
+    "CATEGORY":"Category",
+    "STOCK":"Inventory/stock",
+    "PRIMARY_INGREDIENT_ERROR":"There is no Primary ingredients for create new item",
+    "CATEGORY_ERROR":"There is no Category for create new item",
+    "CATEGORIES" : "Categories",
+    "SUB_CATEGORIES": "Sub Categories"
+  },
+  "BUSINESS_CENTER": {
+    "TITLE": "Business Center",
+    "CHANGE_LOCATION_HEADER": "Select a Business Center to switch",
+    "ASSIGN": "Change Business Center",
+    "NO_LOCATION": "No Business Center found",
+    "PAUSE_BUSINESS_CENTER": "successfully Pause Business Center",
+    "RESUME_BUSINESS_CENTER": "successfully Resume Business Center",
+    "CHANGE_BUSINESS_CENTER": "successfully Change Business Center"
+  },
+  "LOGIN": {
+    "INCORRECT_PIN": "Incorrect PIN. Please try again"
+  },
+  "FORM_VALIDATIONS": {
+    "REQUIRED": "{{name}} is required",
+    "PATTERN": "Invalid {{name}}",
+    "INVALID_CLASS_COUNT": "Class count should be greater than 0",
+    "LEADING_WHITE_SPACES": "Leading white spaces are not allowed",
+    "NO_NEGATIVE_NUMBERS": "Please enter a positive number",
+    "INVALID_BASE_PRICE": "Invalid {{formName}} value",
+    "LEADING_WHITESPACE_NOT_ALLOWED": "Leading white spaces are not allowed",
+    "DATERANGE": "{{name}} must be {{timeline}} the {{compareDate}}.",
+    "DATESAME": "Start date and end date not be same",
+    "MAX_OCCURENCES_EXCEEDED": "Number exceeds max occurrence",
+    "INVALID_STUDENT_COUNT": "Please enter a valid number",
+    "INVALID_MAX_OCCURENCES": "End of occurence should not be more than 365",
+ "MAX_LENGTH_TITLE": "{{name}} shouldn't exceed  {{maxLength}} characters"  },
+  "ERROR": {},
+
+
+  "HEADERS":{
+    "LOGOUT":"Logout"
+  },
+
+  "SCHEDULE": {
+    "SCHEDULE_ACTIVATED": "Item activated successfully",
+    "SCHEDULE_DEACTIVATED": "Item deactived successfully"
+  }
+}
