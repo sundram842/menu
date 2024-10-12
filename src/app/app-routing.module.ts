@@ -61,6 +61,13 @@ const routes: Routes = [
             './scheduled-menus/components/schedule-menu-view-dialog/schedule-menu-view-dialog.component'
           ).then((m) => m.ScheduleMenuViewDialogComponent),
       },
+      {
+        path: 'category',
+        loadComponent: () =>
+          import(
+            './category/components/category-tree/category-tree.component'
+          ).then((m) => m.CategoryTreeComponent),
+      },
     ],
   },
 

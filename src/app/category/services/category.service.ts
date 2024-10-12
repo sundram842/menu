@@ -1,6 +1,7 @@
 import {
   BasicCategoryDetail,
   BasicCategoryDetailAdapter,
+  CategoryTree,
 } from './../models/category.model';
 import {
   HttpClient,
@@ -13,12 +14,14 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import {
   URL_CONSTANTS_TOKEN,
+  urlConstants,
   UrlConstants,
 } from 'src/app/constants/urlConstants';
 import { environment } from 'src/environments/environment';
+import { cn, pn } from '../components/category-tree/category-tree.component';
 export interface CategoryResponse {
   success: boolean;
-  data?: BasicCategoryDetail[];
+  data?: CategoryTree[];
   message?: string;
 }
 @Injectable({
@@ -28,7 +31,7 @@ export class CategoryService {
   private apiUrl!: string;
 
   constructor(
-    @Inject(URL_CONSTANTS_TOKEN) private readonly urlConstants: UrlConstants,
+    // @Inject(URL_CONSTANTS_TOKEN) private readonly urlConstants: UrlConstants,
     private readonly http: HttpClient,
     private readonly basicCategoryDetailAdapter: BasicCategoryDetailAdapter,
   ) {
@@ -39,7 +42,7 @@ export class CategoryService {
   }
 
   getCategories(): Observable<CategoryResponse> {
-    const url = `${this.apiUrl}${this.urlConstants.getCategory}`;
+    const url = `${this.apiUrl}${urlConstants.getCategory}`;
     return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === HttpStatusCode.Ok) {
@@ -56,6 +59,14 @@ export class CategoryService {
         }
       }),
       catchError((errorResponse: HttpErrorResponse) => {
+        if(environment.useMockApi){
+          return of({
+            success: true,
+            data: pn.map((item) =>
+              this.basicCategoryDetailAdapter.adapt(item),
+            ),
+          })
+        }
         return of({
           success: false,
           message: errorResponse?.error?.errors[0]?.code,
@@ -64,8 +75,8 @@ export class CategoryService {
     );
   }
 
-  getSubCategories(subCategoryId: Number): Observable<CategoryResponse> {
-    const url = `${this.apiUrl}${this.urlConstants.getCategory}/${subCategoryId}/${this.urlConstants.subCategory}`;
+  getSubCategories(subCategoryId:any): Observable<CategoryResponse> {
+    const url = `${this.apiUrl}${urlConstants.getCategory}/${subCategoryId}/${urlConstants.subCategory}`;
     return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === HttpStatusCode.Ok) {
@@ -82,7 +93,15 @@ export class CategoryService {
         }
       }),
       catchError((errorResponse: HttpErrorResponse) => {
-        return of({
+        if(environment.useMockApi){
+          return of({
+            success: true,
+            data: cn.map((item) =>
+              this.basicCategoryDetailAdapter.adapt(item),
+            ),
+          })
+        }
+        return of({ 
           success: false,
           message: errorResponse?.error?.errors[0]?.code,
         });
